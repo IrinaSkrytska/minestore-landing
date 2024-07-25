@@ -85,6 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
     slides[0].offsetWidth +
     parseInt(window.getComputedStyle(slides[0]).marginRight);
   const slideNav = document.querySelector(".slide-nav");
+  const slideNavMobile = document.querySelector(".slide-nav-mobile");
   const currentSlideElem = document.querySelector(".current-slide");
   const totalSlidesElem = document.querySelector(".total-slides");
   const scrollContent = document.querySelector("#scroll-content");
@@ -158,26 +159,26 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function createSlideNav() {
-    slideNav.innerHTML = ""; // Clear existing indicators
+    slideNav.innerHTML = "";
+    slideNavMobile.innerHTML = "";
     for (let i = 0; i < slideCount; i++) {
       const span = document.createElement("span");
       span.addEventListener("click", () =>
         showSlide(i, i > currentIndex ? "next" : "prev")
       );
       slideNav.appendChild(span);
+      slideNavMobile.appendChild(span);
     }
-    updateSlideNav(); // Set the initial active indicator
+    updateSlideNav();
   }
 
   function initialize() {
     createSlideNav();
-    // Initialize the default slide indicator
     const indicator = slideCount.toString().padStart(2, "0");
     totalSlidesElem.textContent = `/${indicator}`;
     currentSlideElem.textContent = "01";
   }
 
-  // Event listeners
   prevBtn.addEventListener("click", () => {
     showSlide(currentIndex - 1, "prev");
   });
@@ -186,7 +187,6 @@ document.addEventListener("DOMContentLoaded", () => {
     showSlide(currentIndex + 1, "next");
   });
 
-  // Initialize
   initialize();
 
   // PRICING SWITCH//
@@ -194,23 +194,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const tables = document.querySelectorAll(".pricing-table");
 
   function handleButtonClick(event) {
-    // Get the target class to show
     const targetClass = event.target.getAttribute("data-target");
 
-    // Hide all tables
     tables.forEach((table) => {
       table.classList.add("hidden");
       table.classList.remove("visible");
     });
 
-    // Show the table that matches the clicked button
     const targetTable = document.querySelector(`.${targetClass}`);
     if (targetTable) {
       targetTable.classList.add("visible");
       targetTable.classList.remove("hidden");
     }
 
-    // Update button styles
     buttons.forEach((button) => {
       if (button === event.target) {
         button.classList.add("active-button");
@@ -220,7 +216,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Attach click event listeners to all buttons
   buttons.forEach((button) => {
     button.addEventListener("click", handleButtonClick);
   });
