@@ -553,6 +553,11 @@ body {
     display: none;
   }
 }
+@media (min-width: 767px) {
+  .hidden-mobile {
+    display: block;
+  }
+}
 @media (max-width: 480px) {
   .circle {
     width: 50px;
