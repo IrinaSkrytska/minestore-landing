@@ -768,9 +768,10 @@ body {
     list-style: none;
   }
 }
-
-.feature-item:first-child {
-  margin-left: 20px;
+@media (min-width: 1200px) {
+  .feature-item:first-child {
+    margin-left: 20px;
+  }
 }
 @media screen and (max-width: 767px) {
   .feature-item {
@@ -1088,15 +1089,28 @@ body {
   animation: slideInFromBottom 0.5s ease-out;
   animation-fill-mode: both;
 }
-
-.more-subtitle {
-  margin-bottom: 40px;
-  color: var(--sub-text-color);
-  font-size: 18px;
-  line-height: 28px;
-  overflow: hidden;
-  animation: slideInFromBottom 0.5s ease-out;
-  animation-fill-mode: both;
+@media screen and (max-width: 767px) {
+  .more-subtitle {
+    padding: 0 20px;
+    margin-bottom: 40px;
+    color: var(--sub-text-color);
+    font-size: 14px;
+    line-height: 24spx;
+    overflow: hidden;
+    animation: slideInFromBottom 0.5s ease-out;
+    animation-fill-mode: both;
+  }
+}
+@media screen and (min-width: 767px) {
+  .more-subtitle {
+    margin-bottom: 40px;
+    color: var(--sub-text-color);
+    font-size: 18px;
+    line-height: 28px;
+    overflow: hidden;
+    animation: slideInFromBottom 0.5s ease-out;
+    animation-fill-mode: both;
+  }
 }
 @media screen and (max-width: 767px) {
   .more-thumb {
