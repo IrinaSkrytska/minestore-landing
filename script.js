@@ -160,16 +160,28 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function createSlideNav() {
+    const isSlideNavVisible =
+      window.getComputedStyle(slideNav).display !== "none";
+
     slideNav.innerHTML = "";
     slideNavMobile.innerHTML = "";
+
+    // console.log("test", isSlideNavVisible);
+
     for (let i = 0; i < slideCount; i++) {
       const span = document.createElement("span");
-      span.addEventListener("click", () =>
-        showSlide(i, i > currentIndex ? "next" : "prev")
-      );
-      slideNav.appendChild(span);
-      slideNavMobile.appendChild(span.cloneNode());
+
+      span.addEventListener("click", () => {
+        showSlide(i, i > currentIndex ? "next" : "prev");
+      });
+
+      if (isSlideNavVisible) {
+        slideNav.appendChild(span);
+      } else {
+        slideNavMobile.appendChild(span);
+      }
     }
+
     updateSlideNav();
   }
 
@@ -197,20 +209,17 @@ document.addEventListener("DOMContentLoaded", () => {
   function handleButtonClick(event) {
     const targetClass = event.target.getAttribute("data-target");
 
-    // Hide all tables
     tables.forEach((table) => {
       table.classList.add("hidden");
       table.classList.remove("visible");
     });
 
-    // Show the table that matches the clicked button
     const targetTable = document.querySelector(`.${targetClass}`);
     if (targetTable) {
       targetTable.classList.add("visible");
       targetTable.classList.remove("hidden");
     }
 
-    // Update button styles
     buttons.forEach((button) => {
       if (button === event.target) {
         button.classList.add("active-button");
@@ -220,7 +229,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Attach click event listeners to all buttons
   buttons.forEach((button) => {
     button.addEventListener("click", handleButtonClick);
   });
