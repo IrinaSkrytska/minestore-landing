@@ -21,13 +21,20 @@
   <body>
     <header class="header">
       <div class="header-thumb">
-        <img
-          width="256"
-          src="./images/logo-minestore-white.svg"
-          alt="minestore logo"
-        />
+        <div class="header-mobile-menu">
+          <img
+            width="256"
+            src="./images/logo-minestore-white.svg"
+            alt="minestore logo"
+          />
+          <img
+            class="mobile-menu-icon"
+            alt="minestore mobile menu"
+            src="./images/mobile-menu.svg"
+          />
+        </div>
         <nav>
-          <ul class="navList">
+          <ul class="nav-list">
             <li class="nav-item"><a class="nav-link" href="/home">Home</a></li>
             <li class="nav-item">
               <a class="nav-link" href="/features">Features</a>
@@ -35,15 +42,114 @@
             <li class="nav-item">
               <a class="nav-link" href="/pricing">Pricing</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/pricing">Documentation</a>
+            <li class="nav-item active-menu">
+              <a class="nav-link" href="/documentation">Documentation</a>
+              <div class="nav-menu">
+                <ul>
+                  <li class="nav-menu-title">Menu</li>
+                  <li>
+                    <a class="header-nav-link" href="/utility">Utility Pages</a>
+                  </li>
+                  <li><a class="header-nav-link" href="/blog">Blog</a></li>
+                  <li>
+                    <a class="header-nav-link" href="/blog-cms"
+                      >Blog Single -
+                      <span class="header-nav-link-color">CMS</span></a
+                    >
+                  </li>
+                  <li>
+                    <a class="header-nav-link" href="/pricing">Pricing</a>
+                  </li>
+                  <li>
+                    <a class="header-nav-link" href="/pricing-cms"
+                      >Pricing Single -
+                      <span class="header-nav-link-color">CMS</span></a
+                    >
+                  </li>
+                  <li><a class="header-nav-link" href="/career">Career</a></li>
+                  <li>
+                    <a class="header-nav-link" href="/career-cms"
+                      >Career Single -
+                      <span class="header-nav-link-color">CMS</span></a
+                    >
+                  </li>
+                  <li>
+                    <a class="header-nav-link" href="/contact-us">Contact Us</a>
+                  </li>
+                </ul>
+                <ul>
+                  <li class="nav-menu-title overflow">Menu</li>
+                  <li>
+                    <a class="header-nav-link" href="/style-guide"
+                      >Style Guide</a
+                    >
+                  </li>
+                  <li>
+                    <a class="header-nav-link" href="/password-protection"
+                      >Password Protection</a
+                    >
+                  </li>
+                  <li>
+                    <a class="header-nav-link" href="/not-found"
+                      >404 Not Found</a
+                    >
+                  </li>
+                  <li>
+                    <a class="header-nav-link" href="/lisence">License</a>
+                  </li>
+                  <li>
+                    <a class="header-nav-link" href="/changelog">ChangeLog</a>
+                  </li>
+                  <li>
+                    <a class="header-nav-link" href="/reset-password"
+                      >Reset Password</a
+                    >
+                  </li>
+                </ul>
+                <ul>
+                  <li class="nav-menu-title">Utility Pages</li>
+                  <li>
+                    <a class="header-nav-link" href="/integration"
+                      >Integration</a
+                    >
+                  </li>
+                  <li>
+                    <a class="header-nav-link" href="/integration-cms"
+                      >Integration Single -
+                      <span class="header-nav-link-color">CMS</span></a
+                    >
+                  </li>
+                  <li>
+                    <a class="header-nav-link" href="/feature">Feature</a>
+                  </li>
+                  <li>
+                    <a class="header-nav-link" href="/demo">Book A Demo</a>
+                  </li>
+                  <li>
+                    <a class="header-nav-link" href="/sign-in">Sign In</a>
+                  </li>
+                  <li>
+                    <a class="header-nav-link" href="/sign-up">Sign Up</a>
+                  </li>
+                  <li>
+                    <a class="header-nav-link" href="/forgot-password"
+                      >Forgot Password</a
+                    >
+                  </li>
+                  <li>
+                    <a class="header-nav-link" href="/reset-password"
+                      >Reset Password</a
+                    >
+                  </li>
+                </ul>
+              </div>
             </li>
+            <li><button class="mobile-start-button">Get Started</button></li>
           </ul>
         </nav>
         <button class="nav-btn">Get Started</button>
       </div>
     </header>
-
     <main>
       <!-- HERO -->
       <section class="hero-section" id="about">
@@ -66,10 +172,15 @@
             <button class="hero-demo-btn">Check Demos</button>
           </div>
         </div>
+        <img
+          class="mobile-hero-icon"
+          alt="mobile hero minestore"
+          src="./images/heroImg.webp"
+        />
         <div class="hero-image-thumb">
           <img
             class="hero-image"
-            src="./images/heroImg.png"
+            src="./images/heroImg.webp"
             alt="minestore features"
           />
 
@@ -159,8 +270,6 @@
             <li class="feature-item">
               <img
                 class="feature-item-icon"
-                width="354"
-                height="400"
                 alt="minestore packages"
                 src="./images/Packages.png"
               />
@@ -185,8 +294,6 @@
             <li class="feature-item">
               <img
                 class="feature-item-icon"
-                width="354"
-                height="400"
                 alt="minestore packages"
                 src="./images/Packages.png"
               />
@@ -211,8 +318,6 @@
             <li class="feature-item">
               <img
                 class="feature-item-icon"
-                width="354"
-                height="400"
                 alt="minestore packages"
                 src="./images/Packages.png"
               />
@@ -237,8 +342,6 @@
             <li class="feature-item">
               <img
                 class="feature-item-icon"
-                width="354"
-                height="400"
                 alt="minestore packages"
                 src="./images/Packages.png"
               />
@@ -263,8 +366,6 @@
             <li class="feature-item">
               <img
                 class="feature-item-icon"
-                width="354"
-                height="400"
                 alt="minestore packages"
                 src="./images/Packages.png"
               />
@@ -1025,7 +1126,7 @@
             />
           </li>
         </ul>
-        <div class="line"></div>
+        <div class="full-line"></div>
       </section>
 
       <!-- REVIEWS -->

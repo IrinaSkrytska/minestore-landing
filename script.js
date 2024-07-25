@@ -224,4 +224,19 @@ document.addEventListener("DOMContentLoaded", () => {
   buttons.forEach((button) => {
     button.addEventListener("click", handleButtonClick);
   });
+
+  // MOBILE MENU //
+  const mobileMenuIcon = document.querySelector(".mobile-menu-icon");
+  const navList = document.querySelector(".nav-list");
+  const headerMobileMenu = document.querySelector(".header-mobile-menu");
+
+  mobileMenuIcon.addEventListener("click", function () {
+    if (navList.classList.contains("nav-list-active")) {
+      navList.classList.remove("nav-list-active");
+      mobileMenuIcon.src = "./images/mobile-menu.svg";
+    } else {
+      navList.classList.add("nav-list-active");
+      mobileMenuIcon.src = "./images/close-menu.svg";
+    }
+  });
 });
