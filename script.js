@@ -81,9 +81,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const reviewsList = document.querySelector(".reviews-list");
   const slides = document.querySelectorAll(".review-item");
   const slideCount = slides.length;
-  const slideWidth =
-    slides[0].offsetWidth +
-    parseInt(window.getComputedStyle(slides[0]).marginRight);
   const slideNav = document.querySelector(".slide-nav");
   const slideNavMobile = document.querySelector(".slide-nav-mobile");
   const currentSlideElem = document.querySelector(".current-slide");
@@ -91,27 +88,30 @@ document.addEventListener("DOMContentLoaded", () => {
   const scrollContent = document.querySelector("#scroll-content");
   let currentIndex = 0;
 
+  function getSlideWidth() {
+    return (
+      slides[0].offsetWidth +
+      parseInt(window.getComputedStyle(slides[0]).marginRight)
+    );
+  }
+
   function updateSlideIndicator(direction) {
     const newSlideNumber = (currentIndex + 1).toString().padStart(2, "0");
 
-    // Create new element for the new slide number
     const newSlideElem = document.createElement("p");
     newSlideElem.textContent = newSlideNumber;
     newSlideElem.classList.add(
       direction === "next" ? "scroll-from-bottom" : "scroll-from-top"
     );
 
-    // Clear previous content and add new slide element
     scrollContent.innerHTML = "";
     scrollContent.appendChild(newSlideElem);
 
-    // Handle the transition to "01" from the last slide
     if (
       direction === "next" &&
       currentIndex === 0 &&
       currentSlideElem.textContent === "01"
     ) {
-      // Handle wrap around to first slide
       let currentNumber = slideCount;
       const interval = setInterval(() => {
         currentSlideElem.textContent = currentNumber
@@ -122,20 +122,18 @@ document.addEventListener("DOMContentLoaded", () => {
           clearInterval(interval);
           setTimeout(() => {
             currentSlideElem.textContent = newSlideNumber;
-          }, 500); // Pause at the end of the scrolling
+          }, 500);
         }
-      }, 100); // Adjust speed here
+      }, 100);
     } else {
-      // Normal transition
       currentSlideElem.textContent = newSlideNumber;
     }
 
-    // Reset animation classes after transition
     setTimeout(() => {
       newSlideElem.classList.remove(
         direction === "next" ? "scroll-from-bottom" : "scroll-from-top"
       );
-    }, 500); // Match this with the animation duration
+    }, 500);
   }
 
   function showSlide(index, direction) {
@@ -145,6 +143,7 @@ document.addEventListener("DOMContentLoaded", () => {
       index = slideCount - 1;
     }
 
+    const slideWidth = getSlideWidth();
     reviewsList.style.transform = `translateX(-${index * slideWidth}px)`;
     currentIndex = index;
     updateSlideIndicator(direction);
@@ -152,7 +151,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function updateSlideNav() {
-    const indicators = document.querySelectorAll(".slide-nav span");
+    const indicators = document.querySelectorAll(
+      ".slide-nav span, .slide-nav-mobile span"
+    );
     indicators.forEach((indicator, i) => {
       indicator.classList.toggle("active", i === currentIndex);
     });
@@ -167,7 +168,7 @@ document.addEventListener("DOMContentLoaded", () => {
         showSlide(i, i > currentIndex ? "next" : "prev")
       );
       slideNav.appendChild(span);
-      slideNavMobile.appendChild(span);
+      slideNavMobile.appendChild(span.cloneNode());
     }
     updateSlideNav();
   }
@@ -196,17 +197,20 @@ document.addEventListener("DOMContentLoaded", () => {
   function handleButtonClick(event) {
     const targetClass = event.target.getAttribute("data-target");
 
+    // Hide all tables
     tables.forEach((table) => {
       table.classList.add("hidden");
       table.classList.remove("visible");
     });
 
+    // Show the table that matches the clicked button
     const targetTable = document.querySelector(`.${targetClass}`);
     if (targetTable) {
       targetTable.classList.add("visible");
       targetTable.classList.remove("hidden");
     }
 
+    // Update button styles
     buttons.forEach((button) => {
       if (button === event.target) {
         button.classList.add("active-button");
@@ -216,6 +220,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // Attach click event listeners to all buttons
   buttons.forEach((button) => {
     button.addEventListener("click", handleButtonClick);
   });

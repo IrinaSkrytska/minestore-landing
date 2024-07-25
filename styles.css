@@ -2054,7 +2054,7 @@ body {
   .reviews-section {
     background-color: var(--accent-color);
     padding-top: 40px;
-    padding-bottom: 140px;
+    padding-bottom: 40px;
   }
 }
 @media screen and (min-width: 767px) {
@@ -2187,12 +2187,12 @@ body {
 }
 @media screen and (max-width: 480px) {
   .review-item {
-    flex: 0 0 90%;
+    flex: 0 0 80%;
     height: auto;
     background-color: #282828;
-    border-radius: 28px;
-    padding: 20px;
-    margin-right: 10px;
+    border-radius: 10px;
+    padding: 18px;
+    margin-left: 10px;
   }
 }
 @media screen and (min-width: 480px) and (max-width: 1200px) {
@@ -2203,6 +2203,7 @@ body {
     border-radius: 28px;
     padding: 40px 32px;
     box-sizing: border-box;
+    margin-left: 10px;
   }
 }
 @media (min-width: 1200px) {
@@ -2261,6 +2262,7 @@ body {
   .slide-nav-mobile {
     display: flex;
     justify-content: center;
+    margin-top: 60px;
   }
 }
 @media screen and (min-width: 767px) {
@@ -2292,6 +2294,20 @@ body {
 }
 
 .slide-nav span.active {
+  background-color: var(--text-color);
+}
+.slide-nav-mobile span {
+  display: block;
+  width: 48px;
+  height: 2px;
+  background-color: rgba(255, 255, 255, 0.4);
+
+  margin: 0 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.slide-nav-mobile span.active {
   background-color: var(--text-color);
 }
 
