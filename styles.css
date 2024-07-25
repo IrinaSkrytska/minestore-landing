@@ -820,10 +820,14 @@ body {
     background-color: var(--bg-overlay-color);
     border-radius: 8%;
     display: inline-block;
-    width: calc((100% / 2) - 40px);
-    margin-right: 20px;
+    width: calc((100% / 2) - 60px);
     padding: 20px;
     box-sizing: border-box;
+  }
+}
+@media screen and (min-width: 767px) and (max-width: 1200px) {
+  .feature-item:nth-child(odd) {
+    margin-right: 20px;
   }
 }
 @media (min-width: 1200px) {
