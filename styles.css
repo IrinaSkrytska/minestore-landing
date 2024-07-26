@@ -651,6 +651,7 @@ body {
   border: 2px solid transparent;
 
   animation: bg-spin 12s steps(20, end) infinite;
+  animation: pulse;
 }
 
 @keyframes bg-spin {
@@ -941,16 +942,6 @@ body {
 
 @media (min-width: 1200px) {
   .hero-dashboard-thumb {
-    border: 2px solid transparent;
-    background: radial-gradient(
-      circle at bottom center,
-      rgba(148, 0, 211, 0.5),
-      /* Violet */ rgba(255, 0, 0, 0.5) 60% /* Red */
-    );
-
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 3s;
-
     width: 450px;
     height: 216px;
     z-index: 1;
@@ -961,9 +952,6 @@ body {
     background-size: cover;
     border-radius: 40px;
     padding: 67px 65px 218px 60px;
-
-    /* Apply pulsating border animation */
-    animation: pulse 1s infinite;
   }
 }
 
@@ -998,15 +986,6 @@ body {
     margin-left: 40px;
     border-radius: 10px;
     border: 2px solid transparent;
-    background: radial-gradient(
-      circle at bottom center,
-      rgba(148, 0, 211, 0.5),
-      /* Violet */ rgba(255, 0, 0, 0.5) 60% /* Red */
-    );
-
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 3s;
-    animation: pulse 1s infinite;
   }
 }
 .hero-dashboard-btn {
@@ -1037,7 +1016,7 @@ body {
   align-items: center;
   opacity: 0;
   transform: translateY(50px);
-  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  /* transition: opacity 0.5s ease-out, transform 0.5s ease-out; */
   margin: 0 auto;
   padding: 50px 0;
 }
@@ -1685,6 +1664,16 @@ body {
 }
 
 .visible {
+  /* display: flex;
+  flex-direction: column; */
+  opacity: 1;
+  transform: translateY(0);
+  animation: fadeInUp 0.5s ease-out;
+  animation-fill-mode: both;
+}
+.visible-flex {
+  display: flex;
+  flex-direction: column;
   opacity: 1;
   transform: translateY(0);
   animation: fadeInUp 0.5s ease-out;
@@ -2077,16 +2066,27 @@ body {
     left: 20%;
     transform: translate(-20%, -96%);
     width: 70%;
-    z-index: 10;
+    z-index: 20;
   }
 }
-@media screen and (min-width: 480px) and (min-width: 1200px) {
+@media screen and (min-width: 480px) and (max-width: 1200px) {
   .antifraud-user-icon {
     position: absolute;
-    top: 60%;
-    left: 70%;
-    transform: translate(-70%, -60%);
-    z-index: 10;
+    top: 96%;
+    left: 30%;
+    width: 50%;
+    transform: translate(-30%, -96%);
+    z-index: 20;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .antifraud-user-icon {
+    position: absolute;
+    top: 70%;
+    left: 85%;
+    width: 50%;
+    transform: translate(-85%, -70%);
+    z-index: 20;
   }
 }
 @media screen and (max-width: 480px) {
@@ -2103,6 +2103,13 @@ body {
     padding-bottom: 600px;
   }
 }
+/* @media screen and (min-width: 767px) and (max-width: 1200px) {
+  .antifraud-list {
+    display: flex;
+    flex-wrap: wrap;
+    padding-bottom: 600px;
+  }
+} */
 @media (min-width: 1200px) {
   .antifraud-list {
     display: flex;
@@ -2206,7 +2213,7 @@ body {
 }
 @media screen and (min-width: 767px) and (max-width: 1200px) {
   .categories-title {
-    margin-top: 40%;
+    margin-top: 45%;
     padding: 40px;
     color: var(--accent-color);
     margin-bottom: 0;
@@ -2277,6 +2284,8 @@ body {
 }
 @media screen and (max-width: 767px) {
   .category-btn {
+    width: 220px;
+    height: 60px;
     display: block;
     margin: 0 auto;
     margin-bottom: 20px;
@@ -2297,6 +2306,8 @@ body {
 }
 @media screen and (min-width: 767px) and (max-width: 1200px) {
   .category-btn {
+    width: 220px;
+    height: 60px;
     display: block;
     margin: 0 auto;
     margin-bottom: 20px;
@@ -2317,7 +2328,7 @@ body {
 }
 @media (min-width: 1200px) {
   .category-btn {
-    width: 200px;
+    width: 220px;
     height: 60px;
     margin-left: 40px;
     margin-bottom: 20px;
@@ -3010,6 +3021,7 @@ tr:nth-child(even) {
 }
 @media (max-width: 1200px) {
   .footer-button {
+    height: 60px;
     margin-bottom: 90px;
     width: 100%;
     border: none;
@@ -3171,4 +3183,7 @@ tr:nth-child(even) {
   width: 24px;
   height: 24px;
   display: flex;
+}
+.discount-banner-close {
+  padding: 8px;
 }
