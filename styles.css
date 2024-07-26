@@ -2430,6 +2430,7 @@ body {
 }
 
 /* REVIEWS */
+/* REVIEWS */
 @media screen and (max-width: 767px) {
   .reviews-section {
     background-color: var(--accent-color);

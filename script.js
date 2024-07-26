@@ -36,9 +36,9 @@ document.addEventListener("DOMContentLoaded", () => {
     observer.observe(element);
   });
 
-  document.querySelectorAll(".reviews-section").forEach((element) => {
-    observer.observe(element);
-  });
+  // document.querySelectorAll(".reviews-section").forEach((element) => {
+  //   observer.observe(element);
+  // });
 
   document.querySelectorAll(".pricing-table").forEach((element) => {
     observer.observe(element);
