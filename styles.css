@@ -175,6 +175,12 @@ body {
     justify-content: center;
     font-size: 18px;
     line-height: 28px;
+    position: relative;
+    overflow: hidden;
+    padding: 0;
+    cursor: pointer;
+    box-sizing: border-box;
+    perspective: 1000px;
   }
 }
 @media screen and (max-width: 480px) {
@@ -370,15 +376,18 @@ body {
     animation-fill-mode: both;
   }
 }
-@media screen and (min-width: 480px) and (max-width: 1200px) {
+@media screen and (min-width: 480px) {
   .hero-btns-thumb {
+    display: flex;
     margin-bottom: 80px;
     animation: fadeInUp 0.5s ease-out 0.5s;
     animation-fill-mode: both;
   }
 }
+
 @media screen and (max-width: 480px) {
   .hero-price-btn {
+    position: relative;
     margin-right: 20px;
     margin-bottom: 20px;
     border: 1px solid transparent;
@@ -390,11 +399,11 @@ body {
     height: 60px;
     font-weight: 500;
     font-size: 18px;
-    line-height: 28px;
   }
 }
-@media screen and (min-width: 480px) and (max-width: 1200px) {
+@media screen and (min-width: 480px) {
   .hero-price-btn {
+    position: relative;
     margin-right: 20px;
     border: 1px solid transparent;
     background-color: var(--accent-color);
@@ -408,7 +417,24 @@ body {
     line-height: 28px;
   }
 }
+.hero-price-btn {
+  position: relative;
+  width: 163px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--accent-color);
+  border: 1px solid transparent;
+  border-radius: 15px;
+  overflow: hidden;
+  perspective: 1000px;
+  padding: 0;
+  cursor: pointer;
+  box-sizing: border-box;
+}
 .hero-demo-btn {
+  position: relative;
   margin-right: 20px;
   border: 1px solid transparent;
   background-color: #d76d1f66;
@@ -420,7 +446,86 @@ body {
   font-weight: 500;
   font-size: 18px;
   line-height: 28px;
+  overflow: hidden;
+  perspective: 1000px;
+  padding: 0;
+  cursor: pointer;
+  box-sizing: border-box;
 }
+.button-flip3d {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.5s;
+}
+
+.flipper-flip3d {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.5s;
+}
+
+.front {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backface-visibility: hidden;
+  color: var(--text-color);
+  background: transparent;
+  opacity: 1;
+  transition: transform 0.5s, opacity 0.5s;
+}
+
+.back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backface-visibility: hidden;
+  color: var(--text-color);
+  background: transparent;
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform 0.5s, opacity 0.5s;
+}
+
+.hero-price-btn:hover .button-flip3d,
+.hero-demo-btn:hover .button-flip3d,
+.nav-btn:hover .button-flip3d,
+.more-btn:hover .button-flip3d,
+.category-btn:hover .button-flip3d,
+.footer-button:hover .button-flip3d {
+  transform: rotateX(0deg);
+}
+
+.hero-price-btn:hover .front,
+.hero-demo-btn:hover .front,
+.nav-btn:hover .front,
+.more-btn:hover .front,
+.category-btn:hover .front,
+.footer-button:hover .front {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+.hero-price-btn:hover .back,
+.hero-demo-btn:hover .back,
+.nav-btn:hover .back,
+.more-btn:hover .back,
+.category-btn:hover .back,
+.footer-button:hover .back {
+  transform: translateY(0);
+  opacity: 1;
+}
+
 @media (max-width: 1200px) {
   .hero-image {
     display: none;
@@ -1005,6 +1110,7 @@ body {
     line-height: 118%;
     color: var(--accent-color);
     margin-bottom: 20px;
+    padding: 20px;
   }
 }
 
@@ -1641,8 +1747,10 @@ body {
     width: 45%;
   }
 }
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 480px) {
   .more-btn {
+    width: 60%;
+    height: 60px;
     margin-top: 20px;
     margin-bottom: 40px;
     background-color: var(--accent-color);
@@ -1661,8 +1769,38 @@ body {
     line-height: 28px;
   }
 }
-@media screen and (min-width: 767px) and (max-width: 1200px) {
+@media screen and (min-width: 480px) and (max-width: 767px) {
   .more-btn {
+    width: 200px;
+    height: 60px;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    background-color: var(--accent-color);
+    color: var(--text-color);
+    text-transform: capitalize;
+    border-radius: 15px;
+    flex-flow: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 15px 25px;
+    font-weight: 500;
+    text-decoration: none;
+    display: flex;
+    border: none;
+    font-size: 18px;
+    line-height: 28px;
+  }
+}
+@media screen and (min-width: 767px) {
+  .more-btn {
+    width: 200px;
+    height: 60px;
+    position: relative;
+    overflow: hidden;
+    perspective: 1000px;
+    padding: 0;
+    cursor: pointer;
+    box-sizing: border-box;
     margin-top: 20px;
     margin-bottom: 40px;
     background-color: var(--accent-color);
@@ -1816,6 +1954,7 @@ body {
 @media (min-width: 1200px) {
   .categories-thumb {
     position: relative;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     background-color: var(--bg-overlay-color);
@@ -1953,6 +2092,8 @@ body {
 }
 @media (min-width: 1200px) {
   .category-btn {
+    width: 200px;
+    height: 60px;
     margin-left: 40px;
     margin-bottom: 20px;
     color: var(--text-color);
@@ -1968,6 +2109,11 @@ body {
     border: none;
     font-size: 18px;
     line-height: 28px;
+    overflow: hidden;
+    perspective: 1000px;
+    padding: 0;
+    cursor: pointer;
+    box-sizing: border-box;
   }
 }
 @media (max-width: 1200px) {
@@ -2658,6 +2804,12 @@ tr:nth-child(even) {
 }
 @media (min-width: 1200px) {
   .footer-button {
+    overflow: hidden;
+    perspective: 1000px;
+    padding: 0;
+    cursor: pointer;
+    box-sizing: border-box;
+    height: 60px;
     margin-bottom: 90px;
     max-width: 520px;
     width: 90%;
@@ -2749,4 +2901,48 @@ tr:nth-child(even) {
 .footer-copyright {
   text-align: center;
   color: var(--text-color);
+}
+
+/* DISCOUNT BANNER */
+
+.discount-banner-thumb {
+  display: flex;
+  z-index: 9999;
+  background-color: var(--accent-color);
+  justify-content: center;
+  align-items: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: flex;
+  position: fixed;
+  inset: auto 0% 0%;
+}
+
+@media (max-width: 767px) {
+  .banner-text {
+    padding-left: 10px;
+    color: var(--text-color);
+    text-align: center;
+    font-size: 12px;
+    line-height: 20px;
+  }
+}
+@media (min-width: 767px) {
+  .banner-text {
+    color: var(--text-color);
+    text-align: center;
+    font-size: 18px;
+    line-height: 28px;
+  }
+}
+.discount-banner-close-thumb {
+  margin-right: 10px;
+  margin-left: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  display: flex;
 }

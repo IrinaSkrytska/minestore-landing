@@ -247,4 +247,12 @@ document.addEventListener("DOMContentLoaded", () => {
       mobileMenuIcon.src = "./images/close-menu.svg";
     }
   });
+
+  // HIDING DISCOUNT BANNER
+  const closeButton = document.querySelector(".discount-banner-close");
+  const banner = document.querySelector(".discount-banner-thumb");
+
+  closeButton.addEventListener("click", () => {
+    banner.style.display = "none";
+  });
 });
