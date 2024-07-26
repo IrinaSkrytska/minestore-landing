@@ -20,8 +20,31 @@ document.addEventListener("DOMContentLoaded", () => {
     observer.observe(element);
   });
 
-  // Observe all more-thumb elements
+  document.querySelectorAll(".benefits-section").forEach((element) => {
+    observer.observe(element);
+  });
+
+  document.querySelectorAll(".more-features-section").forEach((element) => {
+    observer.observe(element);
+  });
+
   document.querySelectorAll(".more-thumb").forEach((element) => {
+    observer.observe(element);
+  });
+
+  document.querySelectorAll(".categories-options-list").forEach((element) => {
+    observer.observe(element);
+  });
+
+  document.querySelectorAll(".reviews-section").forEach((element) => {
+    observer.observe(element);
+  });
+
+  document.querySelectorAll(".pricing-table").forEach((element) => {
+    observer.observe(element);
+  });
+
+  document.querySelectorAll(".footer-thumb").forEach((element) => {
     observer.observe(element);
   });
 

@@ -452,6 +452,8 @@ body {
   cursor: pointer;
   box-sizing: border-box;
 }
+
+/* FLIP BUTTONS */
 .button-flip3d {
   position: relative;
   width: 100%;
@@ -540,9 +542,54 @@ body {
 }
 @media (max-width: 1200px) {
   .mobile-hero-icon {
-    width: 100%;
+    display: block;
+    margin: 0 auto;
+    width: 90%;
     height: auto;
     margin-bottom: 80px;
+
+    box-sizing: border-box;
+
+    --border-angle: 0turn;
+
+    --main-bg: conic-gradient(
+      from var(--border-angle),
+      #213,
+      #112 5%,
+      #112 60%,
+      #213 95%
+    );
+
+    --gradient-border: conic-gradient(
+      from var(--border-angle),
+      transparent 25%,
+      #08f,
+      #f03 99%,
+      transparent
+    );
+
+    border: solid 2px transparent;
+    border-radius: 15px;
+    background: conic-gradient(
+          from var(--border-angle),
+          #213,
+          #112 5%,
+          #112 60%,
+          #213 95%
+        )
+        padding-box,
+      conic-gradient(
+          from var(--border-angle),
+          transparent 25%,
+          #08f,
+          #f03 99%,
+          transparent
+        )
+        border-box;
+
+    border: 2px solid transparent;
+
+    animation: bg-spin 12s steps(20, end) infinite;
   }
 }
 @media (min-width: 1200px) {
@@ -550,14 +597,84 @@ body {
     display: none;
   }
 }
+
 .hero-image {
   position: absolute;
   width: 90%;
   max-width: 1280px;
   height: auto;
-  top: 40%;
+  top: 33%;
   left: 50%;
-  transform: translate(-50%, -40%);
+  transform: translate(-50%, -33%);
+  border-radius: 15px;
+  border-spacing: 20px;
+
+  box-sizing: border-box;
+
+  --border-angle: 0turn;
+
+  --main-bg: conic-gradient(
+    from var(--border-angle),
+    #213,
+    #112 5%,
+    #112 60%,
+    #213 95%
+  );
+
+  --gradient-border: conic-gradient(
+    from var(--border-angle),
+    transparent 25%,
+    #08f,
+    #f03 99%,
+    transparent
+  );
+
+  border: solid 2px transparent;
+  border-radius: 15px;
+  background: conic-gradient(
+        from var(--border-angle),
+        #213,
+        #112 5%,
+        #112 60%,
+        #213 95%
+      )
+      padding-box,
+    conic-gradient(
+        from var(--border-angle),
+        transparent 25%,
+        #08f,
+        #f03 99%,
+        transparent
+      )
+      border-box;
+
+  border: 2px solid transparent;
+
+  animation: bg-spin 12s steps(20, end) infinite;
+}
+
+@keyframes bg-spin {
+  to {
+    --border-angle: 1turn;
+  }
+}
+
+@property --border-angle {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0turn;
+}
+
+@keyframes borderAnimation {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
 }
 
 @keyframes fadeInUp {
@@ -570,6 +687,86 @@ body {
     opacity: 1;
   }
 }
+/* CAROUSEL */
+
+.hero-carousel {
+  padding-top: 100px;
+  background-color: var(--accent-color);
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+.hero-carousel-right {
+  background-color: var(--accent-color);
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.hero-carousel-list {
+  display: flex;
+  width: max-content;
+  /* padding: 20px; */
+  /* margin-top: 80px; */
+  margin-bottom: 20px;
+  animation: scroll-left 30s linear infinite;
+}
+@media (max-width: 1200px) {
+  .hero-carousel-list-right {
+    display: flex;
+    width: max-content;
+    /* padding: 20px; */
+    margin-top: 80px;
+    /* margin-bottom: 20px; */
+    animation: scroll-right 30s linear infinite;
+    animation-direction: reverse;
+  }
+}
+@media (min-width: 1200px) {
+  .hero-carousel-list-right {
+    display: flex;
+    width: max-content;
+    /* padding: 20px; */
+    margin-top: 80px;
+    margin-bottom: 80px;
+    animation: scroll-right 30s linear infinite;
+    animation-direction: reverse;
+  }
+}
+.hero-carousel-item {
+  flex: 0 0 auto;
+  margin-right: 40px;
+}
+.hero-carousel-item-right {
+  flex: 0 0 auto;
+  margin-left: 40px;
+}
+
+.hero-carousel-item img {
+  width: 100%;
+  display: block;
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes scroll-right {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* TEXT CAROUSEL */
 @media (max-width: 1200px) {
   .slider {
     padding-top: 80px;
@@ -595,6 +792,7 @@ body {
 }
 .slider-content {
   display: flex;
+  align-items: center;
   width: 200%;
   animation: scroll-left 30s linear infinite;
 }
@@ -693,15 +891,7 @@ body {
     border-radius: 50%;
   }
 }
-@keyframes scroll-left {
-  0% {
-    transform: translateX(0);
-  }
 
-  100% {
-    transform: translateX(-50%);
-  }
-}
 @media (max-width: 1200px) {
   .hero-preview-thumb {
     display: block;
@@ -738,8 +928,29 @@ body {
   }
 }
 
+@keyframes pulse {
+  0% {
+    -moz-box-shadow: 0px 0px 0px 0px rgba(148, 0, 211, 0.6);
+    box-shadow: 0px 0px 0px 0px rgba(148, 0, 211, 0.6);
+  }
+  100% {
+    -moz-box-shadow: 0px 0px 60px 20px rgba(148, 0, 211, 0.3);
+    box-shadow: 0px 0px 60px 20px rgba(148, 0, 211, 0.3);
+  }
+}
+
 @media (min-width: 1200px) {
   .hero-dashboard-thumb {
+    border: 2px solid transparent;
+    background: radial-gradient(
+      circle at bottom center,
+      rgba(148, 0, 211, 0.5),
+      /* Violet */ rgba(255, 0, 0, 0.5) 60% /* Red */
+    );
+
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 3s;
+
     width: 450px;
     height: 216px;
     z-index: 1;
@@ -750,6 +961,9 @@ body {
     background-size: cover;
     border-radius: 40px;
     padding: 67px 65px 218px 60px;
+
+    /* Apply pulsating border animation */
+    animation: pulse 1s infinite;
   }
 }
 
@@ -783,6 +997,16 @@ body {
     height: 500px;
     margin-left: 40px;
     border-radius: 10px;
+    border: 2px solid transparent;
+    background: radial-gradient(
+      circle at bottom center,
+      rgba(148, 0, 211, 0.5),
+      /* Violet */ rgba(255, 0, 0, 0.5) 60% /* Red */
+    );
+
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 3s;
+    animation: pulse 1s infinite;
   }
 }
 .hero-dashboard-btn {
@@ -868,8 +1092,8 @@ body {
 
 .slider-container::-webkit-scrollbar-track {
   background-color: transparent;
-  margin-left: 40px;
-  margin-right: 40px;
+  margin-left: 100px;
+  margin-right: 100px;
 }
 
 .slider-container::-webkit-scrollbar-thumb {
@@ -923,7 +1147,7 @@ body {
   .feature-item {
     margin-bottom: 80px;
     background-color: var(--bg-overlay-color);
-    border-radius: 8%;
+    border-radius: 32px;
     display: inline-block;
     width: calc((100% / 2) - 60px);
     padding: 20px;
@@ -1679,6 +1903,7 @@ body {
     overflow: hidden;
     animation: slideInFromBottom 0.5s ease-out;
     animation-fill-mode: both;
+    height: 750px;
   }
 }
 .antifraud-icon-thumb {
