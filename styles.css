@@ -547,7 +547,6 @@ body {
     width: 90%;
     height: auto;
     margin-bottom: 80px;
-
     box-sizing: border-box;
 
     --border-angle: 0turn;
@@ -563,8 +562,8 @@ body {
     --gradient-border: conic-gradient(
       from var(--border-angle),
       transparent 25%,
-      #08f,
-      #f03 99%,
+      orange,
+      grey 99%,
       transparent
     );
 
@@ -581,16 +580,13 @@ body {
       conic-gradient(
           from var(--border-angle),
           transparent 25%,
-          #08f,
-          #f03 99%,
+          orange,
+          grey 99%,
           transparent
         )
         border-box;
 
-    border: 2px solid transparent;
-
-    animation: bg-spin 12s steps(20, end) infinite;
-    animation: pulse 1s infinite;
+    animation: bg-spin 12s steps(20, end) infinite, pulse 1s infinite;
   }
 }
 @media (min-width: 1200px) {
