@@ -2061,7 +2061,7 @@ body {
     z-index: 1;
   }
 }
-@media (max-width: 1200px) {
+/* @media (max-width: 1200px) {
   .antifraud-user-icon {
     position: absolute;
     top: 90%;
@@ -2069,7 +2069,7 @@ body {
     transform: translate(-20%, -90%);
     z-index: 10;
   }
-}
+} */
 @media screen and (max-width: 480px) {
   .antifraud-user-icon {
     position: absolute;
@@ -2080,7 +2080,7 @@ body {
     z-index: 10;
   }
 }
-@media screen and (max-width: 480px) and (min-width: 1200px) {
+@media screen and (min-width: 480px) and (min-width: 1200px) {
   .antifraud-user-icon {
     position: absolute;
     top: 60%;
