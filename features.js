@@ -31,9 +31,9 @@ document.addEventListener("DOMContentLoaded", function () {
     observer.observe(element);
   });
 
-  // document.querySelectorAll(".benefits-section").forEach((element) => {
-  //   observer.observe(element);
-  // });
+  document.querySelectorAll(".categories-text-thumb").forEach((element) => {
+    observer.observe(element);
+  });
 
   document.querySelectorAll(".more-thumb").forEach((element) => {
     observer.observe(element);
