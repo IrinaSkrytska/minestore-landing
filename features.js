@@ -24,12 +24,18 @@ document.addEventListener("DOMContentLoaded", function () {
   document.querySelectorAll(".features-info-thumb").forEach((element) => {
     observer.observe(element);
   });
+  document.querySelectorAll(".more-sub-features-thumb").forEach((element) => {
+    observer.observe(element);
+  });
+  document.querySelectorAll(".faq-item").forEach((element) => {
+    observer.observe(element);
+  });
 
-  //   document.querySelectorAll(".benefits-section").forEach((element) => {
-  //     observer.observe(element);
-  //   });
+  // document.querySelectorAll(".benefits-section").forEach((element) => {
+  //   observer.observe(element);
+  // });
 
-  document.querySelectorAll(".more-features-section").forEach((element) => {
+  document.querySelectorAll(".more-thumb").forEach((element) => {
     observer.observe(element);
   });
 
@@ -116,5 +122,28 @@ document.addEventListener("DOMContentLoaded", function () {
         arrowIcon.classList.remove("rotate");
       }
     });
+  });
+
+  // MOBILE MENU //
+  const mobileMenuIcon = document.querySelector(".mobile-menu-icon");
+  const navList = document.querySelector(".nav-list");
+  const headerMobileMenu = document.querySelector(".header-mobile-menu");
+
+  mobileMenuIcon.addEventListener("click", function () {
+    if (navList.classList.contains("nav-list-active")) {
+      navList.classList.remove("nav-list-active");
+      mobileMenuIcon.src = "./images/mobile-menu.svg";
+    } else {
+      navList.classList.add("nav-list-active");
+      mobileMenuIcon.src = "./images/close-menu.svg";
+    }
+  });
+
+  // HIDING DISCOUNT BANNER
+  const closeButton = document.querySelector(".discount-banner-close");
+  const banner = document.querySelector(".discount-banner-thumb");
+
+  closeButton.addEventListener("click", () => {
+    banner.style.display = "none";
   });
 });
