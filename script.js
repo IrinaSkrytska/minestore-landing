@@ -35,10 +35,6 @@ document.addEventListener("DOMContentLoaded", () => {
     observer.observe(element);
   });
 
-  document.querySelectorAll(".more-thumb").forEach((element) => {
-    observer.observe(element);
-  });
-
   document.querySelectorAll(".option").forEach((element) => {
     observer.observe(element);
   });
