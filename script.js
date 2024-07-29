@@ -1,79 +1,159 @@
 document.addEventListener("DOMContentLoaded", () => {
   // Elements visibility for animations
+  let lastScrollTop = 0;
+
+  // Elements visibility for animations
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
-        if (
-          entry.target.classList.contains("categories-thumb") ||
-          entry.target.classList.contains("option") ||
-          entry.target.classList.contains("reviews-section") ||
-          entry.target.classList.contains("pricing-section")
-        ) {
-          entry.target.classList.add("visible-flex");
-        } else if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-        } else {
-          entry.target.classList.remove("visible");
+        const currentScrollTop =
+          window.scrollY || document.documentElement.scrollTop;
+
+        // Check if scrolling downwards
+        if (currentScrollTop > lastScrollTop) {
+          if (
+            entry.target.classList.contains("categories-thumb") ||
+            entry.target.classList.contains("option") ||
+            entry.target.classList.contains("reviews-section") ||
+            entry.target.classList.contains("pricing-section") ||
+            entry.target.classList.contains("benefit-list") ||
+            entry.target.classList.contains("benefit-descriptions-list")
+          ) {
+            entry.target.classList.add("visible-flex");
+          } else if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          } else {
+            entry.target.classList.remove("visible");
+          }
         }
+
+        lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
       });
     },
     {
       threshold: 0.1,
+      rootMargin: "0px 0px 0px 0px",
     }
   );
 
-  // Observe all features-info-thumb elements
-  document.querySelectorAll(".features-info-thumb").forEach((element) => {
-    observer.observe(element);
-  });
+  // List of selectors to be observed
+  const selectors = [
+    ".features-info-thumb",
+    ".benefit-line",
+    ".benefits-thumb",
+    ".more-features-thumb",
+    ".more-title",
+    ".more-subtitle",
+    ".more-features-thumb",
+    ".antifraud-thumb",
+    ".categories-options-list",
+    ".categories-section",
+    ".reviews-section",
+    ".pricing-section",
+    ".footer-thumb",
+  ];
 
-  document.querySelectorAll(".benefits-section").forEach((element) => {
-    observer.observe(element);
-  });
-
-  document.querySelectorAll(".more-features-section").forEach((element) => {
-    observer.observe(element);
-  });
-
-  document.querySelectorAll(".option").forEach((element) => {
-    observer.observe(element);
-  });
-
-  document.querySelectorAll(".categories-thumb").forEach((element) => {
-    observer.observe(element);
-  });
-
-  document.querySelectorAll(".reviews-section").forEach((element) => {
-    observer.observe(element);
-  });
-
-  document.querySelectorAll(".pricing-section").forEach((element) => {
-    observer.observe(element);
-  });
-
-  document.querySelectorAll(".footer-thumb").forEach((element) => {
-    observer.observe(element);
+  // Observe all elements matching the selectors
+  selectors.forEach((selector) => {
+    document.querySelectorAll(selector).forEach((element) => {
+      observer.observe(element);
+    });
   });
 
   // Slider functionality
-  const sliderContainer = document.querySelector(".slider-container");
-  const progressBar = document.querySelector(".custom-scrollbar");
 
-  sliderContainer.addEventListener("scroll", () => {
-    const maxScrollLeft =
-      sliderContainer.scrollWidth - sliderContainer.clientWidth;
-    const scrollLeft = sliderContainer.scrollLeft;
-    const scrollPercentage = (scrollLeft / maxScrollLeft) * 100;
-    progressBar.style.width = scrollPercentage + "%";
-  });
+  const desktopMinWidth = 1200;
+  const scrollOffset = 700; // Offset to scroll a little beyond the current view
 
-  sliderContainer.addEventListener("wheel", (event) => {
-    event.preventDefault();
-    sliderContainer.scrollBy({
-      left: event.deltaY < 0 ? -220 : 220,
-      behavior: "smooth",
+  if (window.innerWidth >= desktopMinWidth) {
+    const sliderContainer = document.querySelector(".slider-container");
+    const titleItems = document.querySelectorAll(".benefit-title-item");
+    const descriptionItems = document.querySelectorAll(
+      ".benefit-description-item"
+    );
+
+    let isPageScrolling = false;
+
+    // Function to handle the scroll effect
+    function handleScroll() {
+      const maxScrollLeft =
+        sliderContainer.scrollWidth - sliderContainer.clientWidth;
+      const scrollLeft = sliderContainer.scrollLeft;
+
+      // Determine if we're at the end or start
+      if (scrollLeft >= maxScrollLeft - 5) {
+        // Threshold for the end
+        if (!isPageScrolling) {
+          isPageScrolling = true;
+          window.scrollBy({
+            top: scrollOffset,
+            behavior: "smooth",
+          });
+          setTimeout(() => {
+            isPageScrolling = false;
+          }, 1000); // Adjust timeout as needed
+        }
+      } else if (scrollLeft <= 5) {
+        // Threshold for the start
+        if (!isPageScrolling) {
+          isPageScrolling = true;
+          window.scrollBy({
+            top: -scrollOffset,
+            behavior: "smooth",
+          });
+          setTimeout(() => {
+            isPageScrolling = false;
+          }, 1000); // Adjust timeout as needed
+        }
+      }
+    }
+
+    // Handle slider container scroll
+    sliderContainer.addEventListener("scroll", handleScroll);
+
+    // Handle wheel event for horizontal scrolling
+    sliderContainer.addEventListener("wheel", (event) => {
+      event.preventDefault();
+      sliderContainer.scrollBy({
+        left: event.deltaY < 0 ? -220 : 220,
+        behavior: "smooth",
+      });
     });
-  });
+
+    // Activate item and handle page scroll
+    function activateItem(index) {
+      titleItems.forEach((item) => {
+        item.classList.remove("highlighted");
+      });
+
+      descriptionItems.forEach((item) => {
+        item.classList.remove("active");
+      });
+
+      if (descriptionItems[index]) {
+        descriptionItems[index].classList.add("active");
+      }
+
+      titleItems[index].classList.add("highlighted");
+    }
+
+    // Initial activation
+    activateItem(0);
+
+    // Add click event listeners to title items
+    titleItems.forEach((titleItem, index) => {
+      titleItem.addEventListener("click", () => {
+        activateItem(index);
+      });
+    });
+
+    // Optional: Add a resize event listener to recheck the window width if the user resizes the window
+    window.addEventListener("resize", () => {
+      if (window.innerWidth < desktopMinWidth) {
+        location.reload(); // Reload to reapply the scroll functionality on resize
+      }
+    });
+  }
 
   // Benefits items click action
   const titleItems = document.querySelectorAll(".benefit-title-item");
