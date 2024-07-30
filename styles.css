@@ -524,6 +524,7 @@ body {
 
 .hero-price-btn:hover .button-flip3d,
 .hero-demo-btn:hover .button-flip3d,
+.hero-dashboard-btn:hover .button-flip3d,
 .nav-btn:hover .button-flip3d,
 .more-btn:hover .button-flip3d,
 .category-btn:hover .button-flip3d,
@@ -533,6 +534,7 @@ body {
 
 .hero-price-btn:hover .front,
 .hero-demo-btn:hover .front,
+.hero-dashboard-btn:hover .front,
 .nav-btn:hover .front,
 .more-btn:hover .front,
 .category-btn:hover .front,
@@ -543,6 +545,17 @@ body {
 
 .hero-price-btn:hover .back,
 .hero-demo-btn:hover .back,
+.hero-dashboard-btn:hover .back,
+.nav-btn:hover .back,
+.more-btn:hover .back,
+.category-btn:hover .back,
+.footer-button:hover .back {
+  transform: translateY(0);
+  opacity: 1;
+}
+.hero-price-btn:hover .back,
+.hero-demo-btn:hover .back,
+.hero-dashboard-btn:hover .back,
 .nav-btn:hover .back,
 .more-btn:hover .back,
 .category-btn:hover .back,
@@ -1126,7 +1139,6 @@ body {
 }
 @media screen and (min-width: 767px) {
   .hero-dashboard-btn {
-    display: block;
     background-color: var(--accent-color);
     color: var(--background-color);
     text-transform: capitalize;
@@ -1140,9 +1152,15 @@ body {
     text-decoration: none;
     display: flex;
     position: relative;
-    overflow: hidden;
     font-size: 18px;
     line-height: 28px;
+    width: 200px;
+    height: 60px;
+    position: relative;
+    overflow: hidden;
+    perspective: 1000px;
+    padding: 0;
+    cursor: pointer;
   }
 }
 /* ----- FEATURES SECTION -------*/
