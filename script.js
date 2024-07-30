@@ -1,23 +1,25 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Elements visibility for animations
-  let lastScrollTop = 0;
+  let lastScrollTop = 0; // To track the last scroll position
 
-  // Elements visibility for animations
   const observer = new IntersectionObserver(
     (entries) => {
-      entries.forEach((entry) => {
-        const currentScrollTop =
-          window.scrollY || document.documentElement.scrollTop;
+      const currentScrollTop =
+        window.scrollY || document.documentElement.scrollTop;
 
+      entries.forEach((entry) => {
         // Check if scrolling downwards
         if (currentScrollTop > lastScrollTop) {
+          // console.log(
+          //   "Element:",
+          //   entry.target,
+          //   "Is intersecting:",
+          //   entry.isIntersecting
+          // );
+
           if (
             entry.target.classList.contains("categories-thumb") ||
             entry.target.classList.contains("option") ||
-            entry.target.classList.contains("reviews-section") ||
-            entry.target.classList.contains("pricing-section") ||
-            entry.target.classList.contains("benefit-list") ||
-            entry.target.classList.contains("benefit-descriptions-list")
+            entry.target.classList.contains("categories-text-thumb")
           ) {
             entry.target.classList.add("visible-flex");
           } else if (entry.isIntersecting) {
@@ -25,41 +27,78 @@ document.addEventListener("DOMContentLoaded", () => {
           } else {
             entry.target.classList.remove("visible");
           }
+        } else {
+          // If scrolling up, remove visible class
+          entry.target.classList.remove("visible");
+          entry.target.classList.remove("visible-flex");
         }
-
-        lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
       });
+
+      // Update last scroll position
+      lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
     },
     {
       threshold: 0.1,
-      rootMargin: "0px 0px 0px 0px",
+      rootMargin: "0px 0px -50px 0px",
     }
   );
 
-  // List of selectors to be observed
   const selectors = [
-    ".features-info-thumb",
-    ".benefit-line",
+    ".features-title",
+    ".features-text",
+    ".more-sub-features-thumb",
+    ".categories-thumb",
     ".benefits-thumb",
-    ".more-features-thumb",
     ".more-title",
     ".more-subtitle",
     ".more-features-thumb",
     ".antifraud-thumb",
+    ".more-thumb",
+    ".option",
     ".categories-options-list",
-    ".categories-section",
     ".reviews-section",
-    ".pricing-section",
+    ".pricing-title",
+    ".pricing-sub-text",
+    ".pricing-buttons-thumb",
     ".footer-thumb",
   ];
 
   // Observe all elements matching the selectors
   selectors.forEach((selector) => {
-    document.querySelectorAll(selector).forEach((element) => {
-      observer.observe(element);
-    });
+    document
+      .querySelectorAll(selector)
+      .forEach((element) => observer.observe(element));
   });
 
+  // Apply animation to elements visible on page load
+  const initiallyVisibleSelectors = [
+    ".hero-title",
+    ".hero-description",
+    ".hero-btns-thumb",
+  ];
+
+  initiallyVisibleSelectors.forEach((selector) => {
+    document.querySelectorAll(selector).forEach((element) => {
+      // Check if the element is already in the viewport
+      const rect = element.getBoundingClientRect();
+      if (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= window.innerHeight &&
+        rect.right <= window.innerWidth
+      ) {
+        // Element is in the viewport
+        element.classList.add("visible");
+        if (
+          element.classList.contains("categories-thumb") ||
+          element.classList.contains("option") ||
+          element.classList.contains("categories-text-thumb")
+        ) {
+          element.classList.add("visible-flex");
+        }
+      }
+    });
+  });
   // Slider functionality
 
   const desktopMinWidth = 1200;
