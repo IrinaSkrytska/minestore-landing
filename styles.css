@@ -586,7 +586,6 @@ body {
     box-sizing: border-box;
 
     --border-angle: 0turn;
-
     --main-bg: conic-gradient(
       from var(--border-angle),
       #213,
@@ -598,12 +597,12 @@ body {
     --gradient-border: conic-gradient(
       from var(--border-angle),
       transparent 25%,
-      grey,
+      #ff6f00,
       grey 99%,
       transparent
     );
 
-    border: solid 3px transparent;
+    border: solid 2px transparent;
     border-radius: 15px;
     background: conic-gradient(
           from var(--border-angle),
@@ -616,12 +615,13 @@ body {
       conic-gradient(
           from var(--border-angle),
           transparent 25%,
-          grey,
+          #ff6f00,
           grey 99%,
           transparent
         )
         border-box;
-    animation: bg-spin 10s steps(20, end) infinite, pulse 30s infinite;
+
+    animation: bg-spin 15s steps(20, end) infinite, pulse 30s infinite;
   }
 }
 @media (min-width: 1200px) {
@@ -665,6 +665,7 @@ body {
   box-sizing: border-box;
 
   --border-angle: 0turn;
+
   --main-bg: conic-gradient(
     from var(--border-angle),
     #213,
@@ -676,7 +677,7 @@ body {
   --gradient-border: conic-gradient(
     from var(--border-angle),
     transparent 25%,
-    grey,
+    #ff6f00,
     grey 99%,
     transparent
   );
@@ -694,12 +695,13 @@ body {
     conic-gradient(
         from var(--border-angle),
         transparent 25%,
-        grey,
+        #ff6f00,
         grey 99%,
         transparent
       )
       border-box;
-  animation: bg-spin 10s steps(20, end) infinite, pulse 30s infinite;
+
+  animation: bg-spin 15s steps(20, end) infinite, pulse 30s infinite;
 }
 
 @keyframes bg-spin {
