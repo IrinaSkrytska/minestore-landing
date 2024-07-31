@@ -9,23 +9,26 @@ document.addEventListener("DOMContentLoaded", function () {
       entries.forEach((entry) => {
         // Check if scrolling downwards
         if (currentScrollTop > lastScrollTop) {
-          // console.log(
-          //   "Element:",
-          //   entry.target,
-          //   "Is intersecting:",
-          //   entry.isIntersecting
-          // );
-
-          if (
-            entry.target.classList.contains("categories-thumb") ||
-            entry.target.classList.contains("option") ||
-            entry.target.classList.contains("categories-text-thumb")
-          ) {
-            entry.target.classList.add("visible-flex");
-          } else if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
+          if (entry.isIntersecting) {
+            if (
+              entry.target.classList.contains("categories-thumb") ||
+              entry.target.classList.contains("option") ||
+              entry.target.classList.contains("categories-text-thumb")
+            ) {
+              entry.target.classList.add("visible-flex");
+            } else {
+              entry.target.classList.add("visible");
+            }
           } else {
-            entry.target.classList.remove("visible");
+            if (
+              entry.target.classList.contains("categories-thumb") ||
+              entry.target.classList.contains("option") ||
+              entry.target.classList.contains("categories-text-thumb")
+            ) {
+              entry.target.classList.remove("visible-flex");
+            } else {
+              entry.target.classList.remove("visible");
+            }
           }
         } else {
           // If scrolling up, remove visible class
