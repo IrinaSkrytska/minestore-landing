@@ -299,8 +299,22 @@ body {
     padding-bottom: 360px;
   }
 }
-
-@media (max-width: 767px) {
+@media screen and (max-width: 480px) {
+  .hero-title {
+    padding: 0 20px;
+    margin-bottom: 20px;
+    padding-top: 160px;
+    color: var(--text-color);
+    text-align: center;
+    font-weight: 600;
+    font-size: 25px;
+    line-height: 35px;
+    overflow: hidden;
+    animation: slideInFromBottom 0.5s ease-out;
+    animation-fill-mode: both;
+  }
+}
+@media screen and (min-width: 480xp) and (max-width: 767px) {
   .hero-title {
     padding: 0 20px;
     margin-bottom: 20px;
@@ -319,7 +333,7 @@ body {
   .hero-title {
     margin-bottom: 20px;
     padding-top: 160px;
-    width: 650px;
+    width: 700px;
     color: var(--text-color);
     text-align: center;
     font-weight: 600;
@@ -334,7 +348,7 @@ body {
   .hero-title {
     margin-bottom: 20px;
     padding-top: 160px;
-    width: 650px;
+    width: 800px;
     color: var(--text-color);
     text-align: center;
     font-size: 74px;
@@ -360,8 +374,20 @@ body {
 .hero-title-color {
   color: var(--accent-color);
 }
-
-@media (max-width: 767px) {
+@media screen and (max-width: 480px) {
+  .hero-description {
+    padding: 0 20px;
+    max-width: 560px;
+    margin-bottom: 20px;
+    color: var(--sub-text-color);
+    text-align: center;
+    animation: fadeInUp 0.5s ease-out 0.5s;
+    animation-fill-mode: both;
+    font-size: 13px;
+    line-height: 22px;
+  }
+}
+@media screen and (min-width: 480px) and (max-width: 767px) {
   .hero-description {
     padding: 0 20px;
     max-width: 560px;
@@ -621,7 +647,7 @@ body {
         )
         border-box;
 
-    animation: bg-spin 15s steps(20, end) infinite, pulse 30s infinite;
+    animation: bg-spin 25s infinite, pulse 30s infinite;
   }
 }
 @media (min-width: 1200px) {
@@ -637,18 +663,15 @@ body {
 
 @keyframes pulse {
   0% {
-    box-shadow: 0px -200px 200px rgba(255, 140, 0, 0.3); /* Orange */
+    box-shadow: 0px -100px 150px rgba(255, 140, 0, 0.2); /* Orange */
   }
 
   50% {
-    box-shadow: 0px -200px 200px rgba(255, 105, 0, 0.5); /* Even Darker Orange */
+    box-shadow: 0px -100px 150px rgba(255, 105, 0, 0.4); /* Even Darker Orange */
   }
 
-  80% {
-    box-shadow: 0px -200px 200px rgba(128, 128, 128, 0.7); /* Gray */
-  }
   100% {
-    box-shadow: 0px -200px 200px rgba(255, 140, 0, 0.3); /* Smooth return to Orange */
+    box-shadow: 0px -100px 150px rgba(255, 140, 0, 0.3); /* Smooth return to Orange */
   }
 }
 
@@ -701,7 +724,7 @@ body {
       )
       border-box;
 
-  animation: bg-spin 15s steps(20, end) infinite, pulse 30s infinite;
+  animation: bg-spin 15s linear infinite, pulse 30s linear infinite;
 }
 
 @keyframes bg-spin {
@@ -1861,11 +1884,11 @@ body {
   animation: fadeInUp 0.5s ease-out;
   animation-fill-mode: both;
 }
-
+/* 
 .more-thumb {
   opacity: 0;
   transform: translateY(20px);
-}
+} */
 
 /* -------MORE FEATURES --------- */
 .more-features-section {
@@ -2097,8 +2120,8 @@ body {
   .antifraud-thumb {
     position: relative;
     z-index: 3;
-    display: flex;
-    flex-direction: column;
+    /* display: flex;
+    flex-direction: column; */
     margin: 0 auto;
     height: 900px;
     background-color: #ffffff0a;
@@ -2318,10 +2341,10 @@ body {
 @media screen and (min-width: 767px) and (max-width: 1200px) {
   .antifraud-user-icon {
     position: absolute;
-    top: 85%;
-    left: 40%;
+    top: 94%;
+    left: 30%;
     width: 350px;
-    transform: translate(-40%, -85%);
+    transform: translate(-30%, -94%);
     z-index: 20;
     box-shadow: -6.27px 5.49px 156.8px #4545452b;
   }

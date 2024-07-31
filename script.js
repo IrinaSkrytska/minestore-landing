@@ -7,33 +7,28 @@ document.addEventListener("DOMContentLoaded", () => {
         window.scrollY || document.documentElement.scrollTop;
 
       entries.forEach((entry) => {
-        // Check if scrolling downwards
+        const dataId = entry.target.getAttribute("data-id"); // Get the data-id attribute
+        // console.log("data id:", dataId);
+
         if (currentScrollTop > lastScrollTop) {
+          // Scrolling down
           if (entry.isIntersecting) {
-            if (
-              entry.target.classList.contains("categories-thumb") ||
-              entry.target.classList.contains("option") ||
-              entry.target.classList.contains("categories-text-thumb")
-            ) {
-              entry.target.classList.add("visible-flex");
-            } else {
-              entry.target.classList.add("visible");
-            }
-          } else {
-            if (
-              entry.target.classList.contains("categories-thumb") ||
-              entry.target.classList.contains("option") ||
-              entry.target.classList.contains("categories-text-thumb")
-            ) {
-              entry.target.classList.remove("visible-flex");
-            } else {
-              entry.target.classList.remove("visible");
+            if (!localStorage.getItem(dataId)) {
+              // Add animation classes only if the section hasn't been animated before
+              if (
+                entry.target.classList.contains("categories-thumb") ||
+                entry.target.classList.contains("option") ||
+                entry.target.classList.contains("categories-text-thumb")
+              ) {
+                entry.target.classList.add("visible-flex");
+              } else {
+                entry.target.classList.add("visible");
+              }
+              localStorage.setItem(dataId, "animated"); // Mark as animated
             }
           }
         } else {
-          // If scrolling up, remove visible class
-          entry.target.classList.remove("visible");
-          entry.target.classList.remove("visible-flex");
+          // Scrolling up
         }
       });
 
@@ -41,17 +36,20 @@ document.addEventListener("DOMContentLoaded", () => {
       lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
     },
     {
-      threshold: 0.1,
-      rootMargin: "0px 0px -300px 0px",
+      threshold: 0.3,
+      rootMargin: "0px 0px 0px 0px", //Boofer zone
     }
   );
+  window.addEventListener("load", () => {
+    localStorage.clear();
+  });
 
   const selectors = [
     ".features-title",
     ".features-text",
-    ".more-sub-features-thumb",
     ".categories-thumb",
     ".benefits-thumb",
+    ".more-features-section",
     ".more-title",
     ".more-subtitle",
     ".more-features-thumb",
@@ -102,6 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
+
   // Slider functionality
 
   const desktopMinWidth = 1200;

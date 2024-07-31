@@ -7,33 +7,29 @@ document.addEventListener("DOMContentLoaded", function () {
         window.scrollY || document.documentElement.scrollTop;
 
       entries.forEach((entry) => {
-        // Check if scrolling downwards
+        const dataId = entry.target.getAttribute("data-id"); // Get the data-id attribute
+        console.log("data id:", dataId);
+
         if (currentScrollTop > lastScrollTop) {
+          // Scrolling down
           if (entry.isIntersecting) {
-            if (
-              entry.target.classList.contains("categories-thumb") ||
-              entry.target.classList.contains("option") ||
-              entry.target.classList.contains("categories-text-thumb")
-            ) {
-              entry.target.classList.add("visible-flex");
-            } else {
-              entry.target.classList.add("visible");
-            }
-          } else {
-            if (
-              entry.target.classList.contains("categories-thumb") ||
-              entry.target.classList.contains("option") ||
-              entry.target.classList.contains("categories-text-thumb")
-            ) {
-              entry.target.classList.remove("visible-flex");
-            } else {
-              entry.target.classList.remove("visible");
+            if (!localStorage.getItem(dataId)) {
+              // Add animation classes only if the section hasn't been animated before
+              if (
+                entry.target.classList.contains("categories-thumb") ||
+                entry.target.classList.contains("option") ||
+                entry.target.classList.contains("categories-text-thumb")
+              ) {
+                entry.target.classList.add("visible-flex");
+              } else {
+                entry.target.classList.add("visible");
+              }
+              localStorage.setItem(dataId, "animated"); // Mark as animated
             }
           }
         } else {
-          // If scrolling up, remove visible class
-          entry.target.classList.remove("visible");
-          entry.target.classList.remove("visible-flex");
+          // Scrolling up
+          // You might want to remove classes or manage state if needed
         }
       });
 
@@ -41,16 +37,21 @@ document.addEventListener("DOMContentLoaded", function () {
       lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
     },
     {
-      threshold: 0.1,
-      rootMargin: "0px 0px -300px 0px",
+      threshold: 0.1, // Adjust this as needed
+      rootMargin: "0px 0px 0px 0px", // Adjust this as needed
     }
   );
+
+  window.addEventListener("load", () => {
+    localStorage.clear();
+  });
 
   const selectors = [
     ".features-info-thumb",
     ".feature-item",
     ".more-sub-features-thumb",
     ".accordion",
+    ".categories-thumb",
     ".benefits-thumb",
     ".more-title",
     ".more-subtitle",
@@ -65,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
     ".faq-description",
     ".accrodion",
     ".accrodion-item",
-    ".footer-thumb",
+    ".footer",
   ];
 
   // Observe all elements matching the selectors
@@ -79,30 +80,32 @@ document.addEventListener("DOMContentLoaded", function () {
   const initiallyVisibleSelectors = [
     ".features-section-text",
     ".categories-text-thumb",
-
     ".categories-options-list",
   ];
 
   initiallyVisibleSelectors.forEach((selector) => {
     document.querySelectorAll(selector).forEach((element) => {
-      // Check if the element is already in the viewport
       const rect = element.getBoundingClientRect();
+
+      const categoriesList = "";
+
+      // if (
+      //   rect.top >= 0 &&
+      //   rect.left >= 0 &&
+      //   rect.bottom <= window.innerHeight &&
+      //   rect.right <= window.innerWidth
+      // ) {
+      // Element is in the viewport
+      element.classList.add("visible");
+
       if (
-        rect.top >= 0 &&
-        rect.left >= 0 &&
-        rect.bottom <= window.innerHeight &&
-        rect.right <= window.innerWidth
+        element.classList.contains("categories-thumb") ||
+        element.classList.contains("option") ||
+        element.classList.contains("categories-text-thumb")
       ) {
-        // Element is in the viewport
-        element.classList.add("visible");
-        if (
-          element.classList.contains("categories-thumb") ||
-          element.classList.contains("option") ||
-          element.classList.contains("categories-text-thumb")
-        ) {
-          element.classList.add("visible-flex");
-        }
+        element.classList.add("visible-flex");
       }
+      // }
     });
   });
 
