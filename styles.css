@@ -598,12 +598,12 @@ body {
     --gradient-border: conic-gradient(
       from var(--border-angle),
       transparent 25%,
-      orange,
+      grey,
       grey 99%,
       transparent
     );
 
-    border: solid 2px transparent;
+    border: solid 3px transparent;
     border-radius: 15px;
     background: conic-gradient(
           from var(--border-angle),
@@ -616,13 +616,12 @@ body {
       conic-gradient(
           from var(--border-angle),
           transparent 25%,
-          orange,
+          grey,
           grey 99%,
           transparent
         )
         border-box;
-
-    animation: bg-spin 15s steps(20, end) infinite, pulse 4s infinite;
+    animation: bg-spin 10s steps(20, end) infinite, pulse 30s infinite;
   }
 }
 @media (min-width: 1200px) {
@@ -638,24 +637,18 @@ body {
 
 @keyframes pulse {
   0% {
-    -moz-box-shadow: 0px 0px 80px 40px rgba(211, 211, 211, 0.3); /* Light Grey */
-    box-shadow: 0px 0px 80px 20px rgba(211, 211, 211, 0.3); /* Light Grey */
+    box-shadow: 0px -200px 200px rgba(255, 140, 0, 0.3); /* Orange */
   }
-  25% {
-    -moz-box-shadow: 0px 0px 80px 40px rgba(192, 192, 192, 0.4); /* Medium Light Grey */
-    box-shadow: 0px 0px 80px 40px rgba(192, 192, 192, 0.4); /* Medium Light Grey */
-  }
+
   50% {
-    -moz-box-shadow: 0px 0px 80px 40px rgba(169, 169, 169, 0.5); /* Grey */
-    box-shadow: 0px 0px 80px 40px rgba(169, 169, 169, 0.5); /* Grey */
+    box-shadow: 0px -200px 200px rgba(255, 105, 0, 0.5); /* Even Darker Orange */
   }
-  75% {
-    -moz-box-shadow: 0px 0px 80px 40px rgba(150, 150, 150, 0.6); /* Medium Dark Grey */
-    box-shadow: 0px 0px 80px 40px rgba(150, 150, 150, 0.6); /* Medium Dark Grey */
+
+  80% {
+    box-shadow: 0px -200px 200px rgba(128, 128, 128, 0.7); /* Gray */
   }
   100% {
-    -moz-box-shadow: 0px 0px 80px 40px rgba(128, 128, 128, 0.7); /* Dark Grey */
-    box-shadow: 0px 0px 80px 40px rgba(128, 128, 128, 0.7); /* Dark Grey */
+    box-shadow: 0px -200px 200px rgba(255, 140, 0, 0.3); /* Smooth return to Orange */
   }
 }
 
@@ -669,11 +662,9 @@ body {
   transform: translate(-50%, -33%);
   border-radius: 15px;
   border-spacing: 20px;
-
   box-sizing: border-box;
 
   --border-angle: 0turn;
-
   --main-bg: conic-gradient(
     from var(--border-angle),
     #213,
@@ -708,8 +699,7 @@ body {
         transparent
       )
       border-box;
-
-  animation: bg-spin 15s steps(20, end) infinite, pulse 2s infinite;
+  animation: bg-spin 10s steps(20, end) infinite, pulse 30s infinite;
 }
 
 @keyframes bg-spin {
@@ -3553,7 +3543,7 @@ tbody {
 .sub-features-title {
   display: flex;
   align-items: center;
-  width: 120px;
+  width: 110px;
   height: 40px;
   margin-bottom: 20px;
   text-align: center;
