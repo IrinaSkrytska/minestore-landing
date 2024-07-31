@@ -647,7 +647,7 @@ body {
         )
         border-box;
 
-    animation: bg-spin 25s infinite, pulse 30s infinite;
+    animation: bg-spin 15s linear infinite, pulse 30s infinite;
   }
 }
 @media (min-width: 1200px) {
