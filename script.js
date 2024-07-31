@@ -47,6 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const selectors = [
     ".features-title",
     ".features-text",
+    ".feature-item",
     ".categories-thumb",
     ".benefits-thumb",
     ".more-features-section",
