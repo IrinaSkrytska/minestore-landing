@@ -103,6 +103,46 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
+  // FAQ
+
+  const accordion = document.getElementById("accordion");
+  const items = accordion.querySelectorAll(".accordion-item");
+
+  items.forEach((item) => {
+    const link = item.querySelector(".link");
+    const arrowIcon = link.querySelector(".arrow-icon");
+    const submenu = item.querySelector(".submenu");
+
+    // Function to toggle the accordion item
+    const toggleAccordion = () => {
+      const isOpen = item.classList.contains("open");
+
+      // Toggle the visibility and rotation
+      submenu.style.maxHeight = isOpen ? "0px" : submenu.scrollHeight + "px";
+      submenu.style.opacity = isOpen ? "0" : "1";
+      link.parentElement.classList.toggle("open", !isOpen);
+
+      // Close other items if not allowing multiple open
+      if (!accordion.dataset.multiple) {
+        items.forEach((otherItem) => {
+          if (otherItem !== item) {
+            const otherSubmenu = otherItem.querySelector(".submenu");
+            otherSubmenu.style.maxHeight = "0px";
+            otherSubmenu.style.opacity = "0";
+            otherItem.classList.remove("open");
+          }
+        });
+      }
+    };
+
+    // Add click event to the link and arrow icon
+    link.addEventListener("click", toggleAccordion);
+    arrowIcon.addEventListener("click", (e) => {
+      e.stopPropagation(); // Prevent click event from bubbling up
+      toggleAccordion();
+    });
+  });
+
   // Slider functionality
 
   const desktopMinWidth = 1200;

@@ -3730,7 +3730,7 @@ tbody {
   border-radius: 15px;
 
   padding: 15px;
-  background-color: var(--bg-overlay-color);
+  background-color: #3a3a3a;
 }
 
 @media (max-width: 767px) {
