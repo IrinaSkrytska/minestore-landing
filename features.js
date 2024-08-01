@@ -1,5 +1,26 @@
 document.addEventListener("DOMContentLoaded", function () {
-  let lastScrollTop = 0; // To track the last scroll position
+  let lastScrollTop = 0;
+
+  const scrollOffset = 700; // Offset to scroll a little beyond the current view
+
+  const sliderContainer = document.querySelector(".slider-container");
+  const titleElements = document.querySelectorAll(".benefit-title-item");
+  const descriptionElements = document.querySelectorAll(
+    ".benefit-description-item"
+  );
+
+  let isPageScrolling = false;
+  let isSliderInteracted = false;
+
+  // Function to detect device type
+  function getDeviceType() {
+    if (window.innerWidth >= 1200) return "desktop";
+    if (window.innerWidth >= 768) return "tablet"; // Adjust tablet breakpoint as needed
+    return "phone"; // Default to phone
+  }
+
+  let visibleOptions = []; // Track visible options
+  let batchSize = 3; // Default batch size for desktop
 
   const observer = new IntersectionObserver(
     (entries) => {
@@ -8,7 +29,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
       entries.forEach((entry) => {
         const dataId = entry.target.getAttribute("data-id"); // Get the data-id attribute
-        console.log("data id:", dataId);
 
         if (currentScrollTop > lastScrollTop) {
           // Scrolling down
@@ -29,7 +49,6 @@ document.addEventListener("DOMContentLoaded", function () {
           }
         } else {
           // Scrolling up
-          // You might want to remove classes or manage state if needed
         }
       });
 
@@ -37,39 +56,33 @@ document.addEventListener("DOMContentLoaded", function () {
       lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
     },
     {
-      threshold: 0.1, // Adjust this as needed
-      rootMargin: "0px 0px 0px 0px", // Adjust this as needed
+      threshold: 0.1,
+      rootMargin: "0px 0px 0px 0px", // Buffer zone
     }
   );
 
+  // Clear localStorage on page load
   window.addEventListener("load", () => {
     localStorage.clear();
   });
 
   const selectors = [
-    ".features-info-thumb",
-    ".feature-item",
-    ".more-sub-features-thumb",
-    ".accordion",
+    ".features-title",
+    ".features-text",
     ".categories-thumb",
     ".benefits-thumb",
+    ".more-features-section",
     ".more-title",
     ".more-subtitle",
     ".more-features-thumb",
     ".antifraud-thumb",
     ".more-thumb",
-    ".option",
-    ".sub-features-title-thumb",
-    ".more-sub-features-thumb",
-    ".faq-title",
-    ".faq-sub-title",
-    ".faq-description",
-    ".accrodion",
-    ".accrodion-item",
-    ".footer",
+    ".pricing-title",
+    ".pricing-sub-text",
+    ".pricing-buttons-thumb",
+    ".footer-thumb",
   ];
 
-  // Observe all elements matching the selectors
   selectors.forEach((selector) => {
     document
       .querySelectorAll(selector)
@@ -78,34 +91,106 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Apply animation to elements visible on page load
   const initiallyVisibleSelectors = [
-    ".features-section-text",
-    ".categories-text-thumb",
-    ".categories-options-list",
+    ".hero-title",
+    ".hero-description",
+    ".hero-btns-thumb",
   ];
 
   initiallyVisibleSelectors.forEach((selector) => {
     document.querySelectorAll(selector).forEach((element) => {
       const rect = element.getBoundingClientRect();
-
-      const categoriesList = "";
-
-      // if (
-      //   rect.top >= 0 &&
-      //   rect.left >= 0 &&
-      //   rect.bottom <= window.innerHeight &&
-      //   rect.right <= window.innerWidth
-      // ) {
-      // Element is in the viewport
-      element.classList.add("visible");
-
       if (
-        element.classList.contains("categories-thumb") ||
-        element.classList.contains("option") ||
-        element.classList.contains("categories-text-thumb")
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= window.innerHeight &&
+        rect.right <= window.innerWidth
       ) {
-        element.classList.add("visible-flex");
+        element.classList.add("visible");
+        if (
+          element.classList.contains("categories-thumb") ||
+          element.classList.contains("categories-text-thumb")
+        ) {
+          element.classList.add("visible-flex");
+        }
       }
-      // }
+    });
+  });
+
+  // Function to adjust batch size based on device type
+  function updateBatchSize() {
+    const deviceType = getDeviceType();
+    switch (deviceType) {
+      case "tablet":
+        batchSize = 2;
+        break;
+      case "phone":
+        batchSize = 1;
+        break;
+      default:
+        batchSize = 0; // No animation for desktop
+        break;
+    }
+  }
+
+  // Initialize batch size
+  updateBatchSize();
+
+  const threeItemsObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const element = entry.target;
+          if (!visibleOptions.includes(element)) {
+            visibleOptions.push(element);
+            showOptions();
+          }
+        }
+      });
+    },
+    {
+      threshold: 0.1,
+      rootMargin: "0px 0px 0px 0px",
+    }
+  );
+
+  function showOptions() {
+    // Only process if there are visible options to show
+    if (visibleOptions.length > 0 && batchSize > 0) {
+      // Show up to batchSize options
+      for (let i = 0; i < batchSize && i < visibleOptions.length; i++) {
+        const option = visibleOptions[i];
+        if (!option.classList.contains("visible-flex")) {
+          option.classList.add("visible-flex");
+        }
+      }
+      // Remove the processed options from the list
+      visibleOptions = visibleOptions.slice(batchSize);
+    }
+  }
+
+  // Observe elements
+  const threeItemsSelectors = [
+    ".categories-options-list .option",
+    // Observe feature items only on tablets and phones
+    ...(batchSize > 0 ? [".features-list .feature-item"] : []),
+  ];
+
+  threeItemsSelectors.forEach((selector) => {
+    document
+      .querySelectorAll(selector)
+      .forEach((element) => threeItemsObserver.observe(element));
+  });
+
+  // Handle window resize to adjust batch size
+  window.addEventListener("resize", () => {
+    updateBatchSize();
+    // Reinitialize the observers to apply the correct batch size
+    threeItemsSelectors.forEach((selector) => {
+      document.querySelectorAll(selector).forEach((element) => {
+        if (!threeItemsObserver.observing(element)) {
+          threeItemsObserver.observe(element);
+        }
+      });
     });
   });
 
@@ -151,27 +236,56 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Slider functionality
 
-  const desktopMinWidth = 1200;
-  const scrollOffset = 700; // Offset to scroll a little beyond the current view
+  function isDesktop() {
+    return window.matchMedia("(min-width: 1200px)").matches;
+  }
 
-  if (window.innerWidth >= desktopMinWidth) {
+  console.log("is desktop", isDesktop());
+
+  if (!isDesktop()) {
+    console.log(isDesktop());
+    return;
+  } else if (isDesktop()) {
+    const scrollOffset = 700; // Offset to scroll a little beyond the current view
+
     const sliderContainer = document.querySelector(".slider-container");
-    const titleItems = document.querySelectorAll(".benefit-title-item");
-    const descriptionItems = document.querySelectorAll(
+    const titleElements = document.querySelectorAll(".benefit-title-item");
+    const descriptionElements = document.querySelectorAll(
       ".benefit-description-item"
     );
 
     let isPageScrolling = false;
+    let isSliderInteracted = false;
+
+    function isSafari() {
+      const userAgent = navigator.userAgent.toLowerCase();
+      return userAgent.includes("safari") && !userAgent.includes("chrome");
+    }
 
     // Function to handle the scroll effect
     function handleScroll() {
+      const itemWidth = sliderContainer.scrollWidth / titleElements.length;
       const maxScrollLeft =
         sliderContainer.scrollWidth - sliderContainer.clientWidth;
       const scrollLeft = sliderContainer.scrollLeft;
+      const remainingItems = (maxScrollLeft - scrollLeft) / itemWidth;
 
-      // Determine if we're at the end or start
-      if (scrollLeft >= maxScrollLeft - 5) {
-        // Threshold for the end
+      // Check if the slider is at the end or start
+      const atEnd = remainingItems === 0;
+      const atStart = scrollLeft <= 0.5;
+
+      // Disable body scroll if not at the start or end, unless Safari
+      if (atEnd || atStart) {
+        if (document.body.style.overflow === "hidden" && !isSafari()) {
+          document.body.style.overflow = ""; // Re-enable body scroll
+        }
+      } else {
+        if (document.body.style.overflow !== "hidden" && !isSafari()) {
+          document.body.style.overflow = "hidden"; // Disable body scroll
+        }
+      }
+
+      if (atEnd) {
         if (!isPageScrolling) {
           isPageScrolling = true;
           window.scrollBy({
@@ -180,10 +294,9 @@ document.addEventListener("DOMContentLoaded", function () {
           });
           setTimeout(() => {
             isPageScrolling = false;
-          }, 1000); // Adjust timeout as needed
+          }, 500);
         }
-      } else if (scrollLeft <= 5) {
-        // Threshold for the start
+      } else if (atStart) {
         if (!isPageScrolling) {
           isPageScrolling = true;
           window.scrollBy({
@@ -192,10 +305,50 @@ document.addEventListener("DOMContentLoaded", function () {
           });
           setTimeout(() => {
             isPageScrolling = false;
-          }, 1000); // Adjust timeout as needed
+          }, 500);
         }
       }
     }
+
+    // IntersectionObserver to track slider visibility
+    const Observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.8) {
+            // Slider is at least 80% visible
+            if (!isSafari()) {
+              document.body.style.overflow = "hidden"; // Disable body scroll
+            }
+          } else {
+            // Slider is less than 80% visible
+            if (!isSafari()) {
+              document.body.style.overflow = ""; // Re-enable body scroll
+            }
+          }
+        });
+      },
+      {
+        threshold: [0.8], // Trigger when 80% of the slider is visible
+      }
+    );
+
+    // Start observing the sliderContainer
+    Observer.observe(sliderContainer);
+
+    // Function to scroll slider to the end
+    function scrollToEnd() {
+      sliderContainer.scrollTo({
+        left: sliderContainer.scrollWidth - sliderContainer.clientWidth,
+        behavior: "auto", // Adjust if you want a smooth scroll
+      });
+    }
+
+    // On page load, check if the user should see the slider at the end
+    window.addEventListener("load", () => {
+      if (sessionStorage.getItem("scrollToEnd") === "true") {
+        scrollToEnd();
+      }
+    });
 
     // Handle slider container scroll
     sliderContainer.addEventListener("scroll", handleScroll);
@@ -211,46 +364,52 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Activate item and handle page scroll
     function activateItem(index) {
-      titleItems.forEach((item) => {
+      titleElements.forEach((item) => {
         item.classList.remove("highlighted");
       });
 
-      descriptionItems.forEach((item) => {
+      descriptionElements.forEach((item) => {
         item.classList.remove("active");
       });
 
-      if (descriptionItems[index]) {
-        descriptionItems[index].classList.add("active");
+      if (descriptionElements[index]) {
+        descriptionElements[index].classList.add("active");
       }
 
-      titleItems[index].classList.add("highlighted");
+      titleElements[index].classList.add("highlighted");
     }
 
     // Initial activation
     activateItem(0);
 
-    // Add click event listeners to title items
-    titleItems.forEach((titleItem, index) => {
-      titleItem.addEventListener("click", () => {
+    // Add click event listeners to title elements
+    titleElements.forEach((titleElement, index) => {
+      titleElement.addEventListener("click", () => {
         activateItem(index);
       });
     });
 
-    // Optional: Add a resize event listener to recheck the window width if the user resizes the window
-    window.addEventListener("resize", () => {
-      if (window.innerWidth < desktopMinWidth) {
-        location.reload(); // Reload to reapply the scroll functionality on resize
+    function updateScrollPosition() {
+      if (
+        sliderContainer.scrollLeft >=
+        sliderContainer.scrollWidth - sliderContainer.clientWidth - 1
+      ) {
+        sessionStorage.setItem("scrollToEnd", "true");
+      } else {
+        sessionStorage.setItem("scrollToEnd", "false");
       }
-    });
+    }
+
+    sliderContainer.addEventListener("scroll", updateScrollPosition);
   }
 
-  // Benefits items click action
+  //--------------- Benefits items click action
   const titleItems = document.querySelectorAll(".benefit-title-item");
   const descriptionItems = document.querySelectorAll(
     ".benefit-description-item"
   );
 
-  function activateItem(index) {
+  function activateBenefitItem(index) {
     titleItems.forEach((item) => {
       item.classList.remove("highlighted");
     });
@@ -266,11 +425,11 @@ document.addEventListener("DOMContentLoaded", function () {
     titleItems[index].classList.add("highlighted");
   }
 
-  activateItem(0);
+  activateBenefitItem(0);
 
   titleItems.forEach((titleItem, index) => {
     titleItem.addEventListener("click", () => {
-      activateItem(index);
+      activateBenefitItem(index);
     });
   });
 

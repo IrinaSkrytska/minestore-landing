@@ -1237,26 +1237,36 @@ body {
     scrollbar-width: thin;
     scrollbar-color: var(--accent-color) transparent;
   }
+
+  /* WebKit-based browsers */
+  .slider-container::-webkit-scrollbar {
+    height: 8px; /* Smaller scrollbar height */
+  }
+
+  .slider-container::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  .slider-container::-webkit-scrollbar-thumb {
+    background-color: var(--accent-color);
+    border-radius: 10px; /* Optional: for rounded corners */
+  }
 }
 
 ::-webkit-scrollbar-track {
   width: 20px;
+  margin-left: 300px;
+  margin-right: 300px;
 }
 .slider-container::-webkit-scrollbar {
   height: 5px;
-  width: 10px;
 }
 
 .slider-container::-webkit-scrollbar-track {
-  background-color: transparent;
   margin-left: 300px;
   margin-right: 300px;
 }
 
-.slider-container::-webkit-scrollbar-thumb {
-  background-color: var(--accent-color);
-  border-radius: 10px;
-}
 @media screen and (max-width: 767px) {
   .features-list {
     display: flex;
@@ -1318,14 +1328,21 @@ body {
 }
 @media (min-width: 1200px) {
   .feature-item {
+    padding-left: 40px;
     margin-bottom: 80px;
     background-color: var(--bg-overlay-color);
     border-radius: 32px;
     display: inline-block;
-    width: calc((100% / 2.5) - 20px);
+    width: calc((100% / 2.5) - 40px);
     margin-right: 40px;
     padding: 20px;
-    box-sizing: border-box;
+  }
+
+  .feature-item:first-child {
+    margin-left: 40px;
+  }
+  .feature-item:last-child {
+    margin-right: 40px;
   }
 }
 .feature-item-icon {
@@ -2474,7 +2491,7 @@ body {
     border-radius: 32px;
     margin-bottom: 140px;
     width: 90%;
-    max-width: 1280px;
+    max-width: 1380px;
     overflow: hidden;
     animation: slideInFromBottom 0.5s ease-out;
     animation-fill-mode: both;
@@ -2531,7 +2548,7 @@ body {
     margin: 0 auto;
     flex-wrap: wrap;
     gap: 20px;
-    max-width: 1280px;
+    max-width: 1380px;
     padding: 0 40px;
     margin-bottom: 40px;
   }
