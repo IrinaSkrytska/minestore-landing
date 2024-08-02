@@ -1,17 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
   let lastScrollTop = 0;
 
-  const scrollOffset = 700; // Offset to scroll a little beyond the current view
-
-  const sliderContainer = document.querySelector(".slider-container");
-  const titleElements = document.querySelectorAll(".benefit-title-item");
-  const descriptionElements = document.querySelectorAll(
-    ".benefit-description-item"
-  );
-
-  let isPageScrolling = false;
-  let isSliderInteracted = false;
-
   // Function to detect device type
   function getDeviceType() {
     if (window.innerWidth >= 1200) return "desktop";
@@ -68,18 +57,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const selectors = [
     ".features-title",
-    ".features-text",
+    ".features-info-thumb",
     ".categories-thumb",
     ".benefits-thumb",
     ".more-features-section",
     ".more-title",
     ".more-subtitle",
     ".more-features-thumb",
+    ".more-sub-features-thumb",
     ".antifraud-thumb",
     ".more-thumb",
-    ".pricing-title",
-    ".pricing-sub-text",
-    ".pricing-buttons-thumb",
+    ".faq-title",
+    ".faq-sub-title",
+    ".faq-description",
+    ".accordion",
     ".footer-thumb",
   ];
 
@@ -127,7 +118,7 @@ document.addEventListener("DOMContentLoaded", function () {
         batchSize = 1;
         break;
       default:
-        batchSize = 0; // No animation for desktop
+        batchSize = 3; // Default batch size for desktop
         break;
     }
   }
@@ -135,7 +126,27 @@ document.addEventListener("DOMContentLoaded", function () {
   // Initialize batch size
   updateBatchSize();
 
-  const threeItemsObserver = new IntersectionObserver(
+  // Observer for .categories-options-list .option elements (works on all devices)
+  const categoriesObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const element = entry.target;
+          if (!visibleOptions.includes(element)) {
+            visibleOptions.push(element);
+            showOptions();
+          }
+        }
+      });
+    },
+    {
+      threshold: 0.1,
+      rootMargin: "0px 0px 0px 0px",
+    }
+  );
+
+  // Observer for .features-list .feature-item elements (works only on tablets and phones)
+  const featuresObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
@@ -168,31 +179,38 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // Observe elements
-  const threeItemsSelectors = [
-    ".categories-options-list .option",
-    // Observe feature items only on tablets and phones
-    ...(batchSize > 0 ? [".features-list .feature-item"] : []),
-  ];
+  // Observe elements for categories
+  const categoriesSelectors = [".categories-options-list .option"];
 
-  threeItemsSelectors.forEach((selector) => {
+  categoriesSelectors.forEach((selector) => {
     document
       .querySelectorAll(selector)
-      .forEach((element) => threeItemsObserver.observe(element));
+      .forEach((element) => categoriesObserver.observe(element));
   });
 
-  // Handle window resize to adjust batch size
-  window.addEventListener("resize", () => {
-    updateBatchSize();
-    // Reinitialize the observers to apply the correct batch size
-    threeItemsSelectors.forEach((selector) => {
-      document.querySelectorAll(selector).forEach((element) => {
-        if (!threeItemsObserver.observing(element)) {
-          threeItemsObserver.observe(element);
-        }
+  // Observe elements for features (only on tablets and phones)
+  const featuresSelectors = [".features-list .feature-item"];
+
+  function observeFeatures() {
+    const deviceType = getDeviceType();
+    if (deviceType === "tablet" || deviceType === "phone") {
+      featuresSelectors.forEach((selector) => {
+        document
+          .querySelectorAll(selector)
+          .forEach((element) => featuresObserver.observe(element));
       });
-    });
-  });
+    } else {
+      // Unobserve all feature items if it's a desktop
+      featuresSelectors.forEach((selector) => {
+        document
+          .querySelectorAll(selector)
+          .forEach((element) => featuresObserver.unobserve(element));
+      });
+    }
+  }
+
+  // Initial observation for features
+  observeFeatures();
 
   // FAQ
 
@@ -235,24 +253,17 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // Slider functionality
-
   function isDesktop() {
     return window.matchMedia("(min-width: 1200px)").matches;
   }
 
   console.log("is desktop", isDesktop());
 
-  if (!isDesktop()) {
-    console.log(isDesktop());
-    return;
-  } else if (isDesktop()) {
-    const scrollOffset = 700; // Offset to scroll a little beyond the current view
+  if (isDesktop()) {
+    const scrollOffset = 500; // Offset to scroll a little beyond the current view
 
     const sliderContainer = document.querySelector(".slider-container");
     const titleElements = document.querySelectorAll(".benefit-title-item");
-    const descriptionElements = document.querySelectorAll(
-      ".benefit-description-item"
-    );
 
     let isPageScrolling = false;
     let isSliderInteracted = false;
@@ -272,18 +283,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Check if the slider is at the end or start
       const atEnd = remainingItems === 0;
-      const atStart = scrollLeft <= 0.5;
-
-      // Disable body scroll if not at the start or end, unless Safari
-      if (atEnd || atStart) {
-        if (document.body.style.overflow === "hidden" && !isSafari()) {
-          document.body.style.overflow = ""; // Re-enable body scroll
-        }
-      } else {
-        if (document.body.style.overflow !== "hidden" && !isSafari()) {
-          document.body.style.overflow = "hidden"; // Disable body scroll
-        }
-      }
+      const atStart = scrollLeft <= 40 || scrollLeft <= 0.5;
 
       if (atEnd) {
         if (!isPageScrolling) {
@@ -308,16 +308,18 @@ document.addEventListener("DOMContentLoaded", function () {
           }, 500);
         }
       }
+
+      updateScrollPosition(); // Update scroll position in session storage
     }
 
     // IntersectionObserver to track slider visibility
     const Observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting && entry.intersectionRatio >= 0.8) {
-            // Slider is at least 80% visible
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.9) {
+            // Slider is at least 90% visible
             if (!isSafari()) {
-              document.body.style.overflow = "hidden"; // Disable body scroll
+              document.body.style.overflow = ""; // Re-enable body scroll
             }
           } else {
             // Slider is less than 80% visible
@@ -328,7 +330,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
       },
       {
-        threshold: [0.8], // Trigger when 80% of the slider is visible
+        threshold: [0.9], // Trigger when 90% of the slider is visible
       }
     );
 
@@ -368,14 +370,6 @@ document.addEventListener("DOMContentLoaded", function () {
         item.classList.remove("highlighted");
       });
 
-      descriptionElements.forEach((item) => {
-        item.classList.remove("active");
-      });
-
-      if (descriptionElements[index]) {
-        descriptionElements[index].classList.add("active");
-      }
-
       titleElements[index].classList.add("highlighted");
     }
 
@@ -399,8 +393,6 @@ document.addEventListener("DOMContentLoaded", function () {
         sessionStorage.setItem("scrollToEnd", "false");
       }
     }
-
-    sliderContainer.addEventListener("scroll", updateScrollPosition);
   }
 
   //--------------- Benefits items click action

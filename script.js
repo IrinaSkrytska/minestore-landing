@@ -1,327 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // let lastScrollTop = 0; // To track the last scroll position
-
-  // const observer = new IntersectionObserver(
-  //   (entries) => {
-  //     const currentScrollTop =
-  //       window.scrollY || document.documentElement.scrollTop;
-
-  //     entries.forEach((entry) => {
-  //       const dataId = entry.target.getAttribute("data-id"); // Get the data-id attribute
-  //       // console.log("data id:", dataId);
-
-  //       if (currentScrollTop > lastScrollTop) {
-  //         // Scrolling down
-  //         if (entry.isIntersecting) {
-  //           if (!localStorage.getItem(dataId)) {
-  //             // Add animation classes only if the section hasn't been animated before
-  //             if (
-  //               entry.target.classList.contains("categories-thumb") ||
-  //               entry.target.classList.contains("option") ||
-  //               entry.target.classList.contains("categories-text-thumb")
-  //             ) {
-  //               entry.target.classList.add("visible-flex");
-  //             } else {
-  //               entry.target.classList.add("visible");
-  //             }
-  //             localStorage.setItem(dataId, "animated"); // Mark as animated
-  //           }
-  //         }
-  //       } else {
-  //         // Scrolling up
-  //       }
-  //     });
-
-  //     // Update last scroll position
-  //     lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
-  //   },
-  //   {
-  //     threshold: 0.1,
-  //     rootMargin: "0px 0px 0px 0px", //Boofer zone
-  //   }
-  // );
-  // window.addEventListener("load", () => {
-  //   localStorage.clear();
-  // });
-
-  // const selectors = [
-  //   ".features-title",
-  //   ".features-text",
-  //   // ".feature-item",
-  //   ".categories-thumb",
-  //   ".benefits-thumb",
-  //   ".more-features-section",
-  //   ".more-title",
-  //   ".more-subtitle",
-  //   ".more-features-thumb",
-  //   ".antifraud-thumb",
-  //   ".more-thumb",
-  //   // ".categories-options-list",
-  //   ".pricing-title",
-  //   ".pricing-sub-text",
-  //   ".pricing-buttons-thumb",
-  //   ".footer-thumb",
-  // ];
-
-  // // Observe all elements matching the selectors
-  // selectors.forEach((selector) => {
-  //   document
-  //     .querySelectorAll(selector)
-  //     .forEach((element) => observer.observe(element));
-  // });
-
-  // // Apply animation to elements visible on page load
-  // const initiallyVisibleSelectors = [
-  //   ".hero-title",
-  //   ".hero-description",
-  //   ".hero-btns-thumb",
-  // ];
-
-  // initiallyVisibleSelectors.forEach((selector) => {
-  //   document.querySelectorAll(selector).forEach((element) => {
-  //     // Check if the element is already in the viewport
-  //     const rect = element.getBoundingClientRect();
-  //     if (
-  //       rect.top >= 0 &&
-  //       rect.left >= 0 &&
-  //       rect.bottom <= window.innerHeight &&
-  //       rect.right <= window.innerWidth
-  //     ) {
-  //       // Element is in the viewport
-  //       element.classList.add("visible");
-  //       if (
-  //         element.classList.contains("categories-thumb") ||
-  //         // element.classList.contains("option") ||
-  //         element.classList.contains("categories-text-thumb")
-  //       ) {
-  //         element.classList.add("visible-flex");
-  //       }
-  //     }
-  //   });
-  // });
-
-  // let visibleOptions = []; // Track visible options
-  // const batchSize = 3; // Number of options to show at a time
-
-  // const threeItemsObserver = new IntersectionObserver(
-  //   (entries) => {
-  //     entries.forEach((entry) => {
-  //       if (entry.isIntersecting) {
-  //         const element = entry.target;
-  //         if (!visibleOptions.includes(element)) {
-  //           visibleOptions.push(element);
-  //           showThreeOptions();
-  //         }
-  //       }
-  //     });
-  //   },
-  //   {
-  //     threshold: 0.1,
-  //     rootMargin: "0px 0px 0px 0px",
-  //   }
-  // );
-
-  // function showThreeOptions() {
-  //   // Only process if there are visible options to show
-  //   if (visibleOptions.length > 0) {
-  //     // Show up to `batchSize` options
-  //     for (let i = 0; i < batchSize && i < visibleOptions.length; i++) {
-  //       const option = visibleOptions[i];
-  //       if (!option.classList.contains("visible-flex")) {
-  //         option.classList.add("visible-flex");
-  //       }
-  //     }
-  //     // Remove the processed options from the list
-  //     visibleOptions = visibleOptions.slice(batchSize);
-  //   }
-  // }
-
-  // // Observe elements
-  // const threeItemsSelectors = [".categories-options-list .option"];
-
-  // threeItemsSelectors.forEach((selector) => {
-  //   document
-  //     .querySelectorAll(selector)
-  //     .forEach((element) => threeItemsObserver.observe(element));
-  // });
-
-  // let lastScrollTop = 0; // To track the last scroll position
-
-  // const observer = new IntersectionObserver(
-  //   (entries) => {
-  //     const currentScrollTop =
-  //       window.scrollY || document.documentElement.scrollTop;
-
-  //     entries.forEach((entry) => {
-  //       const dataId = entry.target.getAttribute("data-id"); // Get the data-id attribute
-
-  //       if (currentScrollTop > lastScrollTop) {
-  //         // Scrolling down
-  //         if (entry.isIntersecting) {
-  //           if (!localStorage.getItem(dataId)) {
-  //             // Add animation classes only if the section hasn't been animated before
-  //             if (
-  //               entry.target.classList.contains("categories-thumb") ||
-  //               entry.target.classList.contains("option") ||
-  //               entry.target.classList.contains("categories-text-thumb")
-  //             ) {
-  //               entry.target.classList.add("visible-flex");
-  //             } else {
-  //               entry.target.classList.add("visible");
-  //             }
-  //             localStorage.setItem(dataId, "animated"); // Mark as animated
-  //           }
-  //         }
-  //       } else {
-  //         // Scrolling up
-  //       }
-  //     });
-
-  //     // Update last scroll position
-  //     lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
-  //   },
-  //   {
-  //     threshold: 0.1,
-  //     rootMargin: "0px 0px 0px 0px", // Buffer zone
-  //   }
-  // );
-
-  // window.addEventListener("load", () => {
-  //   localStorage.clear();
-  // });
-
-  // const selectors = [
-  //   ".features-title",
-  //   ".features-text",
-  //   ".categories-thumb",
-  //   ".benefits-thumb",
-  //   ".more-features-section",
-  //   ".more-title",
-  //   ".more-subtitle",
-  //   ".more-features-thumb",
-  //   ".antifraud-thumb",
-  //   ".more-thumb",
-  //   ".pricing-title",
-  //   ".pricing-sub-text",
-  //   ".pricing-buttons-thumb",
-  //   ".footer-thumb",
-  // ];
-
-  // // Observe all elements matching the selectors
-  // selectors.forEach((selector) => {
-  //   document
-  //     .querySelectorAll(selector)
-  //     .forEach((element) => observer.observe(element));
-  // });
-
-  // // Apply animation to elements visible on page load
-  // const initiallyVisibleSelectors = [
-  //   ".hero-title",
-  //   ".hero-description",
-  //   ".hero-btns-thumb",
-  // ];
-
-  // initiallyVisibleSelectors.forEach((selector) => {
-  //   document.querySelectorAll(selector).forEach((element) => {
-  //     // Check if the element is already in the viewport
-  //     const rect = element.getBoundingClientRect();
-  //     if (
-  //       rect.top >= 0 &&
-  //       rect.left >= 0 &&
-  //       rect.bottom <= window.innerHeight &&
-  //       rect.right <= window.innerWidth
-  //     ) {
-  //       // Element is in the viewport
-  //       element.classList.add("visible");
-  //       if (
-  //         element.classList.contains("categories-thumb") ||
-  //         element.classList.contains("categories-text-thumb")
-  //       ) {
-  //         element.classList.add("visible-flex");
-  //       }
-  //     }
-  //   });
-  // });
-
-  // let visibleOptions = []; // Track visible options
-  // const batchSizes = {
-  //   desktop: 3,
-  //   tablet: 2,
-  //   phone: 1,
-  // }; // Number of options to show at a time
-
-  // function getBatchSize() {
-  //   if (window.innerWidth >= 1200) {
-  //     return batchSizes.desktop;
-  //   } else if (window.innerWidth >= 768) {
-  //     return batchSizes.tablet;
-  //   } else {
-  //     return batchSizes.phone;
-  //   }
-  // }
-
-  // const threeItemsObserver = new IntersectionObserver(
-  //   (entries) => {
-  //     entries.forEach((entry) => {
-  //       if (entry.isIntersecting) {
-  //         const element = entry.target;
-  //         if (!visibleOptions.includes(element)) {
-  //           visibleOptions.push(element);
-  //           showOptions();
-  //         }
-  //       }
-  //     });
-  //   },
-  //   {
-  //     threshold: 0.1,
-  //     rootMargin: "0px 0px 0px 0px",
-  //   }
-  // );
-
-  // function showOptions() {
-  //   const batchSize = getBatchSize();
-  //   // Only process if there are visible options to show
-  //   if (visibleOptions.length > 0) {
-  //     // Show up to `batchSize` options
-  //     for (let i = 0; i < batchSize && i < visibleOptions.length; i++) {
-  //       const option = visibleOptions[i];
-  //       if (!option.classList.contains("visible-flex")) {
-  //         option.classList.add("visible-flex");
-  //       }
-  //     }
-  //     // Remove the processed options from the list
-  //     visibleOptions = visibleOptions.slice(batchSize);
-  //   }
-  // }
-
-  // // Observe elements
-  // const threeItemsSelectors = [".categories-options-list .option"];
-
-  // threeItemsSelectors.forEach((selector) => {
-  //   document
-  //     .querySelectorAll(selector)
-  //     .forEach((element) => threeItemsObserver.observe(element));
-  // });
-
-  // // Handle window resize to adjust batch size
-  // window.addEventListener("resize", () => {
-  //   // Clear the list of visible options and show options based on the new batch size
-  //   visibleOptions = [];
-  //   showOptions();
-  // });
-
   let lastScrollTop = 0;
-
-  const scrollOffset = 700; // Offset to scroll a little beyond the current view
-
-  const sliderContainer = document.querySelector(".slider-container");
-  const titleElements = document.querySelectorAll(".benefit-title-item");
-  const descriptionElements = document.querySelectorAll(
-    ".benefit-description-item"
-  );
-
-  let isPageScrolling = false;
-  let isSliderInteracted = false;
 
   // Function to detect device type
   function getDeviceType() {
@@ -438,7 +116,7 @@ document.addEventListener("DOMContentLoaded", () => {
         batchSize = 1;
         break;
       default:
-        batchSize = 0; // No animation for desktop
+        batchSize = 3; // Default batch size for desktop
         break;
     }
   }
@@ -446,7 +124,27 @@ document.addEventListener("DOMContentLoaded", () => {
   // Initialize batch size
   updateBatchSize();
 
-  const threeItemsObserver = new IntersectionObserver(
+  // Observer for .categories-options-list .option elements (works on all devices)
+  const categoriesObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const element = entry.target;
+          if (!visibleOptions.includes(element)) {
+            visibleOptions.push(element);
+            showOptions();
+          }
+        }
+      });
+    },
+    {
+      threshold: 0.1,
+      rootMargin: "0px 0px 0px 0px",
+    }
+  );
+
+  // Observer for .features-list .feature-item elements (works only on tablets and phones)
+  const featuresObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
@@ -479,31 +177,39 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Observe elements
-  const threeItemsSelectors = [
-    ".categories-options-list .option",
-    // Observe feature items only on tablets and phones
-    ...(batchSize > 0 ? [".features-list .feature-item"] : []),
-  ];
+  // Observe elements for categories
+  const categoriesSelectors = [".categories-options-list .option"];
 
-  threeItemsSelectors.forEach((selector) => {
+  categoriesSelectors.forEach((selector) => {
     document
       .querySelectorAll(selector)
-      .forEach((element) => threeItemsObserver.observe(element));
+      .forEach((element) => categoriesObserver.observe(element));
   });
 
-  // Handle window resize to adjust batch size
-  window.addEventListener("resize", () => {
-    updateBatchSize();
-    // Reinitialize the observers to apply the correct batch size
-    threeItemsSelectors.forEach((selector) => {
-      document.querySelectorAll(selector).forEach((element) => {
-        if (!threeItemsObserver.observing(element)) {
-          threeItemsObserver.observe(element);
-        }
+  // Observe elements for features (only on tablets and phones)
+  const featuresSelectors = [".features-list .feature-item"];
+
+  function observeFeatures() {
+    const deviceType = getDeviceType();
+    if (deviceType === "tablet" || deviceType === "phone") {
+      featuresSelectors.forEach((selector) => {
+        document
+          .querySelectorAll(selector)
+          .forEach((element) => featuresObserver.observe(element));
       });
-    });
-  });
+    } else {
+      // Unobserve all feature items if it's a desktop
+      featuresSelectors.forEach((selector) => {
+        document
+          .querySelectorAll(selector)
+          .forEach((element) => featuresObserver.unobserve(element));
+      });
+    }
+  }
+
+  // Initial observation for features
+  observeFeatures();
+
   // ----------Slider functionality
 
   // const scrollOffset = 700; // Offset to scroll a little beyond the current view
@@ -662,23 +368,185 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // sliderContainer.addEventListener("scroll", updateScrollPosition);
 
+  // function isDesktop() {
+  //   return window.matchMedia("(min-width: 1200px)").matches;
+  // }
+
+  // console.log("is desktop", isDesktop());
+
+  // if (!isDesktop()) {
+  //   return;
+  // } else if (isDesktop()) {
+  //   const scrollOffset = 300; // Offset to scroll a little beyond the current view
+
+  //   const sliderContainer = document.querySelector(".slider-container");
+  //   const titleElements = document.querySelectorAll(".benefit-title-item");
+  //   const descriptionElements = document.querySelectorAll(
+  //     ".benefit-description-item"
+  //   );
+
+  //   let isPageScrolling = false;
+  //   let isSliderInteracted = false;
+
+  //   function isSafari() {
+  //     const userAgent = navigator.userAgent.toLowerCase();
+  //     return userAgent.includes("safari") && !userAgent.includes("chrome");
+  //   }
+
+  //   // Function to handle the scroll effect
+  //   function handleScroll() {
+  //     const itemWidth = sliderContainer.scrollWidth / titleElements.length;
+  //     const maxScrollLeft =
+  //       sliderContainer.scrollWidth - sliderContainer.clientWidth;
+  //     const scrollLeft = sliderContainer.scrollLeft;
+  //     const remainingItems = (maxScrollLeft - scrollLeft) / itemWidth;
+
+  //     // Check if the slider is at the end or start
+  //     const atEnd = remainingItems === 0;
+  //     const atStart = scrollLeft <= 0.5;
+
+  //     // // Disable body scroll if not at the start or end, unless Safari
+  //     // if (atEnd || atStart) {
+  //     //   if (document.body.style.overflow === "hidden" && !isSafari()) {
+  //     //     document.body.style.overflow = ""; // Re-enable body scroll
+  //     //   }
+  //     // } else {
+  //     //   if (document.body.style.overflow !== "hidden" && !isSafari()) {
+  //     //     document.body.style.overflow = "hidden"; // Disable body scroll
+  //     //   }
+  //     // }
+
+  //     if (atEnd) {
+  //       if (!isPageScrolling) {
+  //         document.body.style.overflow = "";
+  //         isPageScrolling = true;
+  //         window.scrollBy({
+  //           top: scrollOffset,
+  //           behavior: "smooth",
+  //         });
+  //         setTimeout(() => {
+  //           isPageScrolling = false;
+  //         }, 500);
+  //       }
+  //     } else if (atStart) {
+  //       if (!isPageScrolling) {
+  //         document.body.style.overflow = "";
+  //         isPageScrolling = true;
+  //         window.scrollBy({
+  //           top: -scrollOffset,
+  //           behavior: "smooth",
+  //         });
+  //         setTimeout(() => {
+  //           isPageScrolling = false;
+  //         }, 500);
+  //       }
+  //     }
+  //   }
+
+  //   // IntersectionObserver to track slider visibility
+  //   const Observer = new IntersectionObserver(
+  //     (entries) => {
+  //       entries.forEach((entry) => {
+  //         if (entry.isIntersecting && entry.intersectionRatio === 0.5) {
+  //           // Slider is at least 90% visible
+  //           if (!isSafari()) {
+  //             document.body.style.overflow = "hidden"; // Disable body scroll
+  //           }
+  //         } else {
+  //           // Slider is less than 80% visible
+  //           if (!isSafari()) {
+  //             document.body.style.overflow = ""; // Re-enable body scroll
+  //           }
+  //         }
+  //       });
+  //     },
+  //     {
+  //       threshold: [0.5], // Trigger when 90% of the slider is visible
+  //     }
+  //   );
+
+  //   // Start observing the sliderContainer
+  //   Observer.observe(sliderContainer);
+
+  //   // Function to scroll slider to the end
+  //   function scrollToEnd() {
+  //     sliderContainer.scrollTo({
+  //       left: sliderContainer.scrollWidth - sliderContainer.clientWidth,
+  //       behavior: "auto", // Adjust if you want a smooth scroll
+  //     });
+  //   }
+
+  //   // On page load, check if the user should see the slider at the end
+  //   window.addEventListener("load", () => {
+  //     if (sessionStorage.getItem("scrollToEnd") === "true") {
+  //       scrollToEnd();
+  //     }
+  //   });
+
+  //   // Handle slider container scroll
+  //   sliderContainer.addEventListener("scroll", handleScroll);
+
+  //   // Handle wheel event for horizontal scrolling
+  //   sliderContainer.addEventListener("wheel", (event) => {
+  //     event.preventDefault();
+  //     sliderContainer.scrollBy({
+  //       left: event.deltaY < 0 ? -220 : 220,
+  //       behavior: "smooth",
+  //     });
+  //   });
+
+  //   // Activate item and handle page scroll
+  //   function activateItem(index) {
+  //     titleElements.forEach((item) => {
+  //       item.classList.remove("highlighted");
+  //     });
+
+  //     descriptionElements.forEach((item) => {
+  //       item.classList.remove("active");
+  //     });
+
+  //     if (descriptionElements[index]) {
+  //       descriptionElements[index].classList.add("active");
+  //     }
+
+  //     titleElements[index].classList.add("highlighted");
+  //   }
+
+  //   // Initial activation
+  //   activateItem(0);
+
+  //   // Add click event listeners to title elements
+  //   titleElements.forEach((titleElement, index) => {
+  //     titleElement.addEventListener("click", () => {
+  //       activateItem(index);
+  //     });
+  //   });
+
+  //   function updateScrollPosition() {
+  //     if (
+  //       sliderContainer.scrollLeft >=
+  //       sliderContainer.scrollWidth - sliderContainer.clientWidth - 1
+  //     ) {
+  //       sessionStorage.setItem("scrollToEnd", "true");
+  //     } else {
+  //       sessionStorage.setItem("scrollToEnd", "false");
+  //     }
+  //   }
+
+  //   sliderContainer.addEventListener("scroll", updateScrollPosition);
+  // }
+
   function isDesktop() {
     return window.matchMedia("(min-width: 1200px)").matches;
   }
 
   console.log("is desktop", isDesktop());
 
-  if (!isDesktop()) {
-    console.log(isDesktop());
-    return;
-  } else if (isDesktop()) {
-    const scrollOffset = 700; // Offset to scroll a little beyond the current view
+  if (isDesktop()) {
+    const scrollOffset = 500; // Offset to scroll a little beyond the current view
 
     const sliderContainer = document.querySelector(".slider-container");
     const titleElements = document.querySelectorAll(".benefit-title-item");
-    const descriptionElements = document.querySelectorAll(
-      ".benefit-description-item"
-    );
 
     let isPageScrolling = false;
     let isSliderInteracted = false;
@@ -698,18 +566,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Check if the slider is at the end or start
       const atEnd = remainingItems === 0;
-      const atStart = scrollLeft <= 0.5;
-
-      // Disable body scroll if not at the start or end, unless Safari
-      if (atEnd || atStart) {
-        if (document.body.style.overflow === "hidden" && !isSafari()) {
-          document.body.style.overflow = ""; // Re-enable body scroll
-        }
-      } else {
-        if (document.body.style.overflow !== "hidden" && !isSafari()) {
-          document.body.style.overflow = "hidden"; // Disable body scroll
-        }
-      }
+      const atStart = scrollLeft <= 40 || scrollLeft <= 0.5;
 
       if (atEnd) {
         if (!isPageScrolling) {
@@ -734,16 +591,18 @@ document.addEventListener("DOMContentLoaded", () => {
           }, 500);
         }
       }
+
+      updateScrollPosition(); // Update scroll position in session storage
     }
 
     // IntersectionObserver to track slider visibility
     const Observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting && entry.intersectionRatio >= 0.8) {
-            // Slider is at least 80% visible
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.9) {
+            // Slider is at least 90% visible
             if (!isSafari()) {
-              document.body.style.overflow = "hidden"; // Disable body scroll
+              document.body.style.overflow = ""; // Re-enable body scroll
             }
           } else {
             // Slider is less than 80% visible
@@ -754,7 +613,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       },
       {
-        threshold: [0.8], // Trigger when 80% of the slider is visible
+        threshold: [0.9], // Trigger when 90% of the slider is visible
       }
     );
 
@@ -794,14 +653,6 @@ document.addEventListener("DOMContentLoaded", () => {
         item.classList.remove("highlighted");
       });
 
-      descriptionElements.forEach((item) => {
-        item.classList.remove("active");
-      });
-
-      if (descriptionElements[index]) {
-        descriptionElements[index].classList.add("active");
-      }
-
       titleElements[index].classList.add("highlighted");
     }
 
@@ -825,8 +676,6 @@ document.addEventListener("DOMContentLoaded", () => {
         sessionStorage.setItem("scrollToEnd", "false");
       }
     }
-
-    sliderContainer.addEventListener("scroll", updateScrollPosition);
   }
 
   //--------------- Benefits items click action
