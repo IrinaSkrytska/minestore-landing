@@ -536,27 +536,309 @@ document.addEventListener("DOMContentLoaded", () => {
   //   sliderContainer.addEventListener("scroll", updateScrollPosition);
   // }
 
+  // function isDesktop() {
+  //   return window.matchMedia("(min-width: 1200px)").matches;
+  // }
+
+  // console.log("is desktop", isDesktop());
+
+  // if (isDesktop()) {
+  //   const scrollOffset = 500; // Offset to scroll a little beyond the current view
+
+  //   const sliderContainer = document.querySelector(".slider-container");
+  //   const titleElements = document.querySelectorAll(".benefit-title-item");
+
+  //   let isPageScrolling = false;
+  //   let isSliderInteracted = false;
+
+  //   function isSafari() {
+  //     const userAgent = navigator.userAgent.toLowerCase();
+  //     return userAgent.includes("safari") && !userAgent.includes("chrome");
+  //   }
+
+  //   // Function to handle the scroll effect
+  //   function handleScroll() {
+  //     const itemWidth = sliderContainer.scrollWidth / titleElements.length;
+  //     const maxScrollLeft =
+  //       sliderContainer.scrollWidth - sliderContainer.clientWidth;
+  //     const scrollLeft = sliderContainer.scrollLeft;
+  //     const remainingItems = (maxScrollLeft - scrollLeft) / itemWidth;
+
+  //     // Check if the slider is at the end or start
+  //     const atEnd = remainingItems === 0;
+  //     const atStart = scrollLeft <= 40 || scrollLeft <= 0.5;
+
+  //     if (atEnd) {
+  //       if (!isPageScrolling) {
+  //         isPageScrolling = true;
+  //         window.scrollBy({
+  //           top: scrollOffset,
+  //           behavior: "smooth",
+  //         });
+  //         setTimeout(() => {
+  //           isPageScrolling = false;
+  //         }, 500);
+  //       }
+  //     } else if (atStart) {
+  //       if (!isPageScrolling) {
+  //         isPageScrolling = true;
+  //         window.scrollBy({
+  //           top: -scrollOffset,
+  //           behavior: "smooth",
+  //         });
+  //         setTimeout(() => {
+  //           isPageScrolling = false;
+  //         }, 500);
+  //       }
+  //     }
+
+  //     updateScrollPosition(); // Update scroll position in session storage
+  //   }
+
+  //   // IntersectionObserver to track slider visibility
+  //   const Observer = new IntersectionObserver(
+  //     (entries) => {
+  //       entries.forEach((entry) => {
+  //         if (entry.isIntersecting && entry.intersectionRatio >= 0.9) {
+  //           // Slider is at least 90% visible
+  //           if (!isSafari()) {
+  //             document.body.style.overflow = ""; // Re-enable body scroll
+  //           }
+  //         } else {
+  //           // Slider is less than 80% visible
+  //           if (!isSafari()) {
+  //             document.body.style.overflow = ""; // Re-enable body scroll
+  //           }
+  //         }
+  //       });
+  //     },
+  //     {
+  //       threshold: [0.9], // Trigger when 90% of the slider is visible
+  //     }
+  //   );
+
+  //   // Start observing the sliderContainer
+  //   Observer.observe(sliderContainer);
+
+  //   // Function to scroll slider to the end
+  //   function scrollToEnd() {
+  //     sliderContainer.scrollTo({
+  //       left: sliderContainer.scrollWidth - sliderContainer.clientWidth,
+  //       behavior: "auto", // Adjust if you want a smooth scroll
+  //     });
+  //   }
+
+  //   // On page load, check if the user should see the slider at the end
+  //   window.addEventListener("load", () => {
+  //     if (sessionStorage.getItem("scrollToEnd") === "true") {
+  //       scrollToEnd();
+  //     }
+  //   });
+
+  //   // Handle slider container scroll
+  //   sliderContainer.addEventListener("scroll", handleScroll);
+
+  //   // Handle wheel event for horizontal scrolling
+  //   sliderContainer.addEventListener("wheel", (event) => {
+  //     event.preventDefault();
+  //     sliderContainer.scrollBy({
+  //       left: event.deltaY < 0 ? -220 : 220,
+  //       behavior: "smooth",
+  //     });
+  //   });
+
+  //   // Activate item and handle page scroll
+  //   function activateItem(index) {
+  //     titleElements.forEach((item) => {
+  //       item.classList.remove("highlighted");
+  //     });
+
+  //     titleElements[index].classList.add("highlighted");
+  //   }
+
+  //   // Initial activation
+  //   activateItem(0);
+
+  //   // Add click event listeners to title elements
+  //   titleElements.forEach((titleElement, index) => {
+  //     titleElement.addEventListener("click", () => {
+  //       activateItem(index);
+  //     });
+  //   });
+
+  //   function updateScrollPosition() {
+  //     if (
+  //       sliderContainer.scrollLeft >=
+  //       sliderContainer.scrollWidth - sliderContainer.clientWidth - 1
+  //     ) {
+  //       sessionStorage.setItem("scrollToEnd", "true");
+  //     } else {
+  //       sessionStorage.setItem("scrollToEnd", "false");
+  //     }
+  //   }
+  // }
+  // function isDesktop() {
+  //   return window.matchMedia("(min-width: 1200px)").matches;
+  // }
+
+  // console.log("is desktop", isDesktop());
+
+  // if (isDesktop()) {
+  //   const scrollOffset = 1000; // Offset to scroll a little beyond the current view
+
+  //   const sliderContainer = document.querySelector(".slider-container");
+  //   const titleElements = document.querySelectorAll(".feature-item");
+
+  //   let isPageScrolling = false;
+  //   let isSliderInteracted = false;
+
+  //   function handleScroll() {
+  //     const itemWidth = sliderContainer.scrollWidth / titleElements.length;
+  //     const maxScrollLeft =
+  //       sliderContainer.scrollWidth - sliderContainer.clientWidth;
+  //     const scrollLeft = sliderContainer.scrollLeft;
+  //     const remainingItems = (maxScrollLeft - scrollLeft) / itemWidth;
+
+  //     // Check if the slider is at the end or start
+  //     const atEnd = remainingItems === 0;
+  //     const atStart = scrollLeft <= 0.5 || scrollLeft === 40;
+
+  //     if (atEnd) {
+  //       if (!isPageScrolling) {
+  //         isPageScrolling = true;
+  //         window.scrollBy({
+  //           top: scrollOffset,
+  //           behavior: "smooth",
+  //         });
+  //         setTimeout(() => {
+  //           isPageScrolling = false;
+  //         }, 500);
+  //       }
+  //     } else if (atStart) {
+  //       if (!isPageScrolling) {
+  //         isPageScrolling = true;
+  //         window.scrollBy({
+  //           top: -scrollOffset,
+  //           behavior: "smooth",
+  //         });
+  //         setTimeout(() => {
+  //           isPageScrolling = false;
+  //         }, 500);
+  //       }
+  //     }
+
+  //     updateScrollPosition(); // Update scroll position in session storage
+  //   }
+
+  //   function preventScroll(event) {
+  //     const itemWidth = sliderContainer.scrollWidth / titleElements.length;
+  //     const maxScrollLeft =
+  //       sliderContainer.scrollWidth - sliderContainer.clientWidth;
+  //     const scrollLeft = sliderContainer.scrollLeft;
+  //     const remainingItems = (maxScrollLeft - scrollLeft) / itemWidth;
+
+  //     const atEnd = remainingItems <= 0;
+  //     const atStart = scrollLeft <= 0.5;
+
+  //     if (!atEnd && !atStart) {
+  //       event.preventDefault();
+  //       sliderContainer.scrollBy({
+  //         left: event.deltaY < 0 ? -220 : 220,
+  //         behavior: "smooth",
+  //       });
+  //     }
+  //   }
+
+  //   // IntersectionObserver to track slider visibility
+  //   const Observer = new IntersectionObserver(
+  //     (entries) => {
+  //       entries.forEach((entry) => {
+  //         if (entry.isIntersecting && entry.intersectionRatio >= 0.08) {
+  //           console.log("view:", entry.intersectionRatio);
+  //           // Slider is at least 90% visible
+  //           document.addEventListener("wheel", preventScroll, {
+  //             passive: false,
+  //           });
+  //         } else {
+  //           // Slider is less than 90% visible
+  //           document.removeEventListener("wheel", preventScroll);
+  //         }
+  //       });
+  //     },
+  //     {
+  //       threshold: [0.08], // Trigger when 90% of the slider is visible
+  //     }
+  //   );
+
+  //   // Start observing the sliderContainer
+  //   Observer.observe(sliderContainer);
+
+  //   // Function to scroll slider to the end
+  //   function scrollToEnd() {
+  //     sliderContainer.scrollTo({
+  //       left: sliderContainer.scrollWidth - sliderContainer.clientWidth,
+  //       behavior: "auto", // Adjust if you want a smooth scroll
+  //     });
+  //   }
+
+  //   // On page load, check if the user should see the slider at the end
+  //   window.addEventListener("load", () => {
+  //     if (sessionStorage.getItem("scrollToEnd") === "true") {
+  //       scrollToEnd();
+  //     }
+  //   });
+
+  //   // Handle slider container scroll
+  //   sliderContainer.addEventListener("scroll", handleScroll);
+
+  //   // Handle wheel event for horizontal scrolling
+  //   sliderContainer.addEventListener("wheel", (event) => {
+  //     preventScroll(event);
+  //   });
+
+  //   // Activate item and handle page scroll
+  //   function activateItem(index) {
+  //     titleElements.forEach((item) => {
+  //       item.classList.remove("highlighted");
+  //     });
+
+  //     titleElements[index].classList.add("highlighted");
+  //   }
+
+  //   // Initial activation
+  //   activateItem(0);
+
+  //   // Add click event listeners to title elements
+  //   titleElements.forEach((titleElement, index) => {
+  //     titleElement.addEventListener("click", () => {
+  //       activateItem(index);
+  //     });
+  //   });
+
+  //   function updateScrollPosition() {
+  //     if (
+  //       sliderContainer.scrollLeft >=
+  //       sliderContainer.scrollWidth - sliderContainer.clientWidth - 1
+  //     ) {
+  //       sessionStorage.setItem("scrollToEnd", "true");
+  //     } else {
+  //       sessionStorage.setItem("scrollToEnd", "false");
+  //     }
+  //   }
+  // }
+
   function isDesktop() {
     return window.matchMedia("(min-width: 1200px)").matches;
   }
-
-  console.log("is desktop", isDesktop());
 
   if (isDesktop()) {
     const scrollOffset = 500; // Offset to scroll a little beyond the current view
 
     const sliderContainer = document.querySelector(".slider-container");
-    const titleElements = document.querySelectorAll(".benefit-title-item");
+    const titleElements = document.querySelectorAll(".feature-item");
 
     let isPageScrolling = false;
-    let isSliderInteracted = false;
 
-    function isSafari() {
-      const userAgent = navigator.userAgent.toLowerCase();
-      return userAgent.includes("safari") && !userAgent.includes("chrome");
-    }
-
-    // Function to handle the scroll effect
     function handleScroll() {
       const itemWidth = sliderContainer.scrollWidth / titleElements.length;
       const maxScrollLeft =
@@ -566,7 +848,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Check if the slider is at the end or start
       const atEnd = remainingItems === 0;
-      const atStart = scrollLeft <= 40 || scrollLeft <= 0.5;
+      const atStart = scrollLeft <= 0.5 || scrollLeft === 40;
 
       if (atEnd) {
         if (!isPageScrolling) {
@@ -595,25 +877,63 @@ document.addEventListener("DOMContentLoaded", () => {
       updateScrollPosition(); // Update scroll position in session storage
     }
 
+    function preventScroll(event) {
+      const itemWidth = sliderContainer.scrollWidth / titleElements.length;
+      const maxScrollLeft =
+        sliderContainer.scrollWidth - sliderContainer.clientWidth;
+      const scrollLeft = sliderContainer.scrollLeft;
+      const remainingItems = (maxScrollLeft - scrollLeft) / itemWidth;
+
+      const atEnd = remainingItems === 0;
+      const atStart = scrollLeft <= 0.5;
+
+      if (!atStart) {
+        event.preventDefault();
+        sliderContainer.scrollBy({
+          left: event.deltaY < 0 ? -220 : 220,
+          behavior: "smooth",
+        });
+      }
+    }
+
+    function cursorIsOnSlider(event) {
+      const rect = sliderContainer.getBoundingClientRect();
+      return (
+        event.clientX >= rect.left &&
+        event.clientX <= rect.right &&
+        event.clientY >= rect.top &&
+        event.clientY <= rect.bottom
+      );
+    }
+
+    // Prevent page scroll when slider is not at the first item
+    document.addEventListener(
+      "wheel",
+      (event) => {
+        if (cursorIsOnSlider(event)) {
+          preventScroll(event);
+        }
+      },
+      { passive: false }
+    );
+
     // IntersectionObserver to track slider visibility
     const Observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting && entry.intersectionRatio >= 0.9) {
-            // Slider is at least 90% visible
-            if (!isSafari()) {
-              document.body.style.overflow = ""; // Re-enable body scroll
-            }
+          console.log("entry", entry.intersectionRatio);
+          if (entry.isIntersecting && entry.intersectionRatio >= 1) {
+            document.addEventListener("wheel", preventScroll, {
+              passive: false,
+            });
           } else {
-            // Slider is less than 80% visible
-            if (!isSafari()) {
-              document.body.style.overflow = ""; // Re-enable body scroll
-            }
+            // Slider is less than 8% visible
+            document.removeEventListener("wheel", preventScroll);
           }
         });
       },
       {
-        threshold: [0.9], // Trigger when 90% of the slider is visible
+        threshold: [0.9], // Trigger when 8% of the slider is visible
       }
     );
 
@@ -637,15 +957,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Handle slider container scroll
     sliderContainer.addEventListener("scroll", handleScroll);
-
-    // Handle wheel event for horizontal scrolling
-    sliderContainer.addEventListener("wheel", (event) => {
-      event.preventDefault();
-      sliderContainer.scrollBy({
-        left: event.deltaY < 0 ? -220 : 220,
-        behavior: "smooth",
-      });
-    });
 
     // Activate item and handle page scroll
     function activateItem(index) {
