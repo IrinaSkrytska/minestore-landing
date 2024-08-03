@@ -1018,7 +1018,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!isPageScrolling) {
           isPageScrolling = true;
           window.scrollBy({
-            top: shouldScrollToEnd ? 0 : scrollOffset,
+            top: scrollOffset,
             behavior: "smooth",
           });
           setTimeout(() => {
@@ -1087,7 +1087,7 @@ document.addEventListener("DOMContentLoaded", () => {
       (entries) => {
         entries.forEach((entry) => {
           console.log("entry", entry.intersectionRatio);
-          if (entry.isIntersecting && entry.intersectionRatio >= 0.9) {
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.8) {
             document.addEventListener("wheel", preventScroll, {
               passive: false,
             });
@@ -1098,7 +1098,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       },
       {
-        threshold: [0.9], // Trigger when 90% of the slider is visible
+        threshold: [0.8], // Trigger when 90% of the slider is visible
       }
     );
 
