@@ -827,17 +827,180 @@ document.addEventListener("DOMContentLoaded", () => {
   //   }
   // }
 
+  // function isDesktop() {
+  //   return window.matchMedia("(min-width: 1200px)").matches;
+  // }
+
+  // if (isDesktop()) {
+  //   const scrollOffset = 500; // Offset to scroll a little beyond the current view
+
+  //   const sliderContainer = document.querySelector(".slider-container");
+  //   const titleElements = document.querySelectorAll(".feature-item");
+
+  //   let isPageScrolling = false;
+
+  //   function handleScroll() {
+  //     const itemWidth = sliderContainer.scrollWidth / titleElements.length;
+  //     const maxScrollLeft =
+  //       sliderContainer.scrollWidth - sliderContainer.clientWidth;
+  //     const scrollLeft = sliderContainer.scrollLeft;
+  //     const remainingItems = (maxScrollLeft - scrollLeft) / itemWidth;
+
+  //     // Check if the slider is at the end or start
+  //     const atEnd = remainingItems === 0;
+  //     const atStart = scrollLeft <= 0.5 || scrollLeft === 40;
+
+  //     if (atEnd) {
+  //       if (!isPageScrolling) {
+  //         isPageScrolling = true;
+  //         window.scrollBy({
+  //           top: scrollOffset,
+  //           behavior: "smooth",
+  //         });
+  //         setTimeout(() => {
+  //           isPageScrolling = false;
+  //         }, 500);
+  //       }
+  //     } else if (atStart) {
+  //       if (!isPageScrolling) {
+  //         isPageScrolling = true;
+  //         window.scrollBy({
+  //           top: -scrollOffset,
+  //           behavior: "smooth",
+  //         });
+  //         setTimeout(() => {
+  //           isPageScrolling = false;
+  //         }, 500);
+  //       }
+  //     }
+
+  //     updateScrollPosition(); // Update scroll position in session storage
+  //   }
+
+  //   function preventScroll(event) {
+  //     const itemWidth = sliderContainer.scrollWidth / titleElements.length;
+  //     const maxScrollLeft =
+  //       sliderContainer.scrollWidth - sliderContainer.clientWidth;
+  //     const scrollLeft = sliderContainer.scrollLeft;
+  //     const remainingItems = (maxScrollLeft - scrollLeft) / itemWidth;
+
+  //     const atEnd = remainingItems === 0;
+  //     const atStart = scrollLeft <= 0.5;
+
+  //     if (!atStart) {
+  //       event.preventDefault();
+  //       sliderContainer.scrollBy({
+  //         left: event.deltaY < 0 ? -220 : 220,
+  //         behavior: "smooth",
+  //       });
+  //     }
+  //   }
+
+  //   function cursorIsOnSlider(event) {
+  //     const rect = sliderContainer.getBoundingClientRect();
+  //     return (
+  //       event.clientX >= rect.left &&
+  //       event.clientX <= rect.right &&
+  //       event.clientY >= rect.top &&
+  //       event.clientY <= rect.bottom
+  //     );
+  //   }
+
+  //   // Prevent page scroll when slider is not at the first item
+  //   document.addEventListener(
+  //     "wheel",
+  //     (event) => {
+  //       if (cursorIsOnSlider(event)) {
+  //         preventScroll(event);
+  //       }
+  //     },
+  //     { passive: false }
+  //   );
+
+  //   // IntersectionObserver to track slider visibility
+  //   const Observer = new IntersectionObserver(
+  //     (entries) => {
+  //       entries.forEach((entry) => {
+  //         console.log("entry", entry.intersectionRatio);
+  //         if (entry.isIntersecting && entry.intersectionRatio >= 1) {
+  //           document.addEventListener("wheel", preventScroll, {
+  //             passive: false,
+  //           });
+  //         } else {
+  //           // Slider is less than 8% visible
+  //           document.removeEventListener("wheel", preventScroll);
+  //         }
+  //       });
+  //     },
+  //     {
+  //       threshold: [0.9], // Trigger when 8% of the slider is visible
+  //     }
+  //   );
+
+  //   // Start observing the sliderContainer
+  //   Observer.observe(sliderContainer);
+
+  //   // Function to scroll slider to the end
+  //   function scrollToEnd() {
+  //     sliderContainer.scrollTo({
+  //       left: sliderContainer.scrollWidth - sliderContainer.clientWidth,
+  //       behavior: "auto", // Adjust if you want a smooth scroll
+  //     });
+  //   }
+
+  //   // On page load, check if the user should see the slider at the end
+  //   window.addEventListener("load", () => {
+  //     if (sessionStorage.getItem("scrollToEnd") === "true") {
+  //       scrollToEnd();
+  //     }
+  //   });
+
+  //   // Handle slider container scroll
+  //   sliderContainer.addEventListener("scroll", handleScroll);
+
+  //   // Activate item and handle page scroll
+  //   function activateItem(index) {
+  //     titleElements.forEach((item) => {
+  //       item.classList.remove("highlighted");
+  //     });
+
+  //     titleElements[index].classList.add("highlighted");
+  //   }
+
+  //   // Initial activation
+  //   activateItem(0);
+
+  //   // Add click event listeners to title elements
+  //   titleElements.forEach((titleElement, index) => {
+  //     titleElement.addEventListener("click", () => {
+  //       activateItem(index);
+  //     });
+  //   });
+
+  //   function updateScrollPosition() {
+  //     if (
+  //       sliderContainer.scrollLeft >=
+  //       sliderContainer.scrollWidth - sliderContainer.clientWidth - 1
+  //     ) {
+  //       sessionStorage.setItem("scrollToEnd", "true");
+  //     } else {
+  //       sessionStorage.setItem("scrollToEnd", "false");
+  //     }
+  //   }
+  // }
   function isDesktop() {
     return window.matchMedia("(min-width: 1200px)").matches;
   }
 
   if (isDesktop()) {
-    const scrollOffset = 500; // Offset to scroll a little beyond the current view
+    const scrollOffset = 700; // Offset to scroll a little beyond the current view
 
     const sliderContainer = document.querySelector(".slider-container");
     const titleElements = document.querySelectorAll(".feature-item");
 
     let isPageScrolling = false;
+
+    const shouldScrollToEnd = sessionStorage.getItem("scrollToEnd") === "true";
 
     function handleScroll() {
       const itemWidth = sliderContainer.scrollWidth / titleElements.length;
@@ -851,10 +1014,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const atStart = scrollLeft <= 0.5 || scrollLeft === 40;
 
       if (atEnd) {
+        sessionStorage.setItem("scrollToEnd", "true");
         if (!isPageScrolling) {
           isPageScrolling = true;
           window.scrollBy({
-            top: scrollOffset,
+            top: shouldScrollToEnd ? 0 : scrollOffset,
             behavior: "smooth",
           });
           setTimeout(() => {
@@ -862,6 +1026,7 @@ document.addEventListener("DOMContentLoaded", () => {
           }, 500);
         }
       } else if (atStart) {
+        sessionStorage.setItem("scrollToEnd", "false");
         if (!isPageScrolling) {
           isPageScrolling = true;
           window.scrollBy({
@@ -922,18 +1087,18 @@ document.addEventListener("DOMContentLoaded", () => {
       (entries) => {
         entries.forEach((entry) => {
           console.log("entry", entry.intersectionRatio);
-          if (entry.isIntersecting && entry.intersectionRatio >= 1) {
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.9) {
             document.addEventListener("wheel", preventScroll, {
               passive: false,
             });
           } else {
-            // Slider is less than 8% visible
+            // Slider is less than 90% visible
             document.removeEventListener("wheel", preventScroll);
           }
         });
       },
       {
-        threshold: [0.9], // Trigger when 8% of the slider is visible
+        threshold: [0.9], // Trigger when 90% of the slider is visible
       }
     );
 
@@ -950,13 +1115,34 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // On page load, check if the user should see the slider at the end
     window.addEventListener("load", () => {
-      if (sessionStorage.getItem("scrollToEnd") === "true") {
-        scrollToEnd();
+      const savedScrollLeft = sessionStorage.getItem("sliderScrollLeft");
+      const shouldScrollToEnd =
+        sessionStorage.getItem("scrollToEnd") === "true";
+
+      if (savedScrollLeft) {
+        // Restore the slider position
+        sliderContainer.scrollLeft = parseFloat(savedScrollLeft);
+      }
+
+      if (shouldScrollToEnd && !savedScrollLeft) {
+        // If the user was at the end, scroll to the end section
+        const sliderRect = sliderContainer.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
+        if (sliderRect.bottom < viewportHeight) {
+          window.scrollBy({
+            top: sliderRect.height, // Scroll to the section after the slider
+            behavior: "auto",
+          });
+        }
       }
     });
 
     // Handle slider container scroll
-    sliderContainer.addEventListener("scroll", handleScroll);
+    sliderContainer.addEventListener("scroll", () => {
+      // Update scroll position in session storage
+      sessionStorage.setItem("sliderScrollLeft", sliderContainer.scrollLeft);
+      handleScroll();
+    });
 
     // Activate item and handle page scroll
     function activateItem(index) {
