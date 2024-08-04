@@ -60,7 +60,6 @@ document.addEventListener("DOMContentLoaded", function () {
     ".features-info-thumb",
     ".categories-thumb",
     ".benefits-thumb",
-    ".more-features-section",
     ".more-title",
     ".more-subtitle",
     ".more-features-thumb",
@@ -97,10 +96,7 @@ document.addEventListener("DOMContentLoaded", function () {
         rect.right <= window.innerWidth
       ) {
         element.classList.add("visible");
-        if (
-          element.classList.contains("categories-thumb") ||
-          element.classList.contains("categories-text-thumb")
-        ) {
+        if (element.classList.contains("categories-text-thumb")) {
           element.classList.add("visible-flex");
         }
       }

@@ -1718,9 +1718,6 @@ body {
     padding: 20px;
     margin: 0 auto;
     margin-bottom: 80px;
-    overflow: hidden;
-    animation: slideInFromBottom 0.5s ease-out;
-    animation-fill-mode: both;
   }
 }
 @media screen and (min-width: 767px) and (max-width: 1199px) {
@@ -1737,9 +1734,6 @@ body {
     padding: 32px 64px 32px 32px;
     margin: 0 auto;
     margin-bottom: 80px;
-    overflow: hidden;
-    animation: slideInFromBottom 0.5s ease-out;
-    animation-fill-mode: both;
   }
 }
 @media (min-width: 1200px) {
@@ -1755,9 +1749,6 @@ body {
     padding: 32px 64px 32px 32px;
     margin: 0 auto;
     margin-bottom: 80px;
-    overflow: hidden;
-    animation: slideInFromBottom 0.5s ease-out;
-    animation-fill-mode: both;
   }
 }
 @media screen and (max-width: 767px) {
@@ -2002,9 +1993,6 @@ body {
     width: 80%;
 
     padding: 20px;
-    overflow: hidden;
-    animation: slideInFromBottom 0.5s ease-out;
-    animation-fill-mode: both;
   }
 }
 @media screen and (min-width: 480px) and (max-width: 767px) {
@@ -2019,9 +2007,6 @@ body {
     width: 85%;
 
     padding: 20px;
-    overflow: hidden;
-    animation: slideInFromBottom 0.5s ease-out;
-    animation-fill-mode: both;
   }
 }
 @media screen and (min-width: 767px) and (max-width: 1200px) {
@@ -2036,9 +2021,6 @@ body {
     width: 85%;
     max-width: 1180px;
     padding: 40px 40px 40px;
-    overflow: hidden;
-    animation: slideInFromBottom 0.5s ease-out;
-    animation-fill-mode: both;
   }
 }
 @media screen and (min-width: 1200px) {
@@ -2053,9 +2035,6 @@ body {
     width: 90%;
     max-width: 1260px;
     padding: 40px 40px 40px;
-    overflow: hidden;
-    animation: slideInFromBottom 0.5s ease-out;
-    animation-fill-mode: both;
   }
 }
 @media (max-width: 1199px) {
@@ -2184,9 +2163,6 @@ body {
     border-radius: 32px;
     padding: 20px;
     width: 80%;
-    overflow: hidden;
-    animation: slideInFromBottom 0.5s ease-out;
-    animation-fill-mode: both;
   }
 }
 @media screen and (min-width: 480px) and (max-width: 767px) {
@@ -2201,9 +2177,6 @@ body {
     border-radius: 32px;
     padding: 20px;
     width: 85%;
-    overflow: hidden;
-    animation: slideInFromBottom 0.5s ease-out;
-    animation-fill-mode: both;
   }
 }
 @media screen and (min-width: 767px) and (max-width: 1200px) {
@@ -2219,9 +2192,6 @@ body {
     border-radius: 32px;
     padding: 80px 40px 50px;
     width: 85%;
-    overflow: hidden;
-    animation: slideInFromBottom 0.5s ease-out;
-    animation-fill-mode: both;
   }
 }
 @media (min-width: 1200px) {
@@ -2237,9 +2207,7 @@ body {
     padding-left: 60px;
     width: 90%;
     max-width: 1280px;
-    overflow: hidden;
-    animation: slideInFromBottom 0.5s ease-out;
-    animation-fill-mode: both;
+
     height: 650px;
   }
 }
@@ -2532,9 +2500,6 @@ body {
     margin-bottom: 60px;
     width: 90%;
     max-width: 1280px;
-    overflow: hidden;
-    animation: slideInFromBottom 0.5s ease-out;
-    animation-fill-mode: both;
   }
 }
 @media screen and (min-width: 767px) and (max-width: 1199px) {
@@ -2549,9 +2514,6 @@ body {
     margin-bottom: 140px;
     width: 90%;
     max-width: 1280px;
-    overflow: hidden;
-    animation: slideInFromBottom 0.5s ease-out;
-    animation-fill-mode: both;
   }
 }
 @media (min-width: 1200px) {
@@ -2566,9 +2528,6 @@ body {
     margin-bottom: 140px;
     width: 90%;
     max-width: 1380px;
-    overflow: hidden;
-    animation: slideInFromBottom 0.5s ease-out;
-    animation-fill-mode: both;
   }
 }
 @media screen and (max-width: 767px) {

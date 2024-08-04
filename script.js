@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (!localStorage.getItem(dataId)) {
               // Add animation classes only if the section hasn't been animated before
               if (
-                entry.target.classList.contains("categories-thumb") ||
+                // entry.target.classList.contains("categories-thumb") ||
                 entry.target.classList.contains("option") ||
                 entry.target.classList.contains("categories-text-thumb")
               ) {
@@ -33,6 +33,8 @@ document.addEventListener("DOMContentLoaded", () => {
               } else {
                 entry.target.classList.add("visible");
               }
+              console.log(`Animating ${dataId}`);
+
               localStorage.setItem(dataId, "animated"); // Mark as animated
             }
           }
@@ -46,7 +48,6 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     {
       threshold: 0.1,
-      rootMargin: "0px 0px 0px 0px", // Buffer zone
     }
   );
 
@@ -58,14 +59,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const selectors = [
     ".features-title",
     ".features-text",
-    ".categories-thumb",
+
     ".benefits-thumb",
-    ".more-features-section",
     ".more-title",
     ".more-subtitle",
+    ".more-thumb",
     ".more-features-thumb",
     ".antifraud-thumb",
-    ".more-thumb",
+    ".categories-thumb",
     ".pricing-title",
     ".pricing-sub-text",
     ".pricing-buttons-thumb",
@@ -96,7 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
       ) {
         element.classList.add("visible");
         if (
-          element.classList.contains("categories-thumb") ||
+          // element.classList.contains("categories-thumb") ||
           element.classList.contains("categories-text-thumb")
         ) {
           element.classList.add("visible-flex");
@@ -1087,7 +1088,7 @@ document.addEventListener("DOMContentLoaded", () => {
       (entries) => {
         entries.forEach((entry) => {
           console.log("entry", entry.intersectionRatio);
-          if (entry.isIntersecting && entry.intersectionRatio >= 0.8) {
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.92) {
             document.addEventListener("wheel", preventScroll, {
               passive: false,
             });
@@ -1098,7 +1099,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       },
       {
-        threshold: [0.8], // Trigger when 90% of the slider is visible
+        threshold: [0.92], // Trigger when 92% of the slider is visible
       }
     );
 
