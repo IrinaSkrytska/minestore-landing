@@ -1623,6 +1623,12 @@ body {
     padding: 20px;
   }
 }
+@media screen and (max-width: 1200px) {
+  .benefit-descriptions-list {
+    display: block;
+    padding: 20px;
+  }
+}
 /* @media screen and (min-width: 767px) and (max-width: 1200px) {
   .benefit-descriptions-list {
     display: block;
