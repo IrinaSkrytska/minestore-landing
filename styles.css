@@ -1474,12 +1474,20 @@ body {
   }
 }
 @media (min-width: 1200px) {
+  .benefits-thumb-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+}
+@media (min-width: 1200px) {
   .benefits-thumb {
     display: flex;
     align-items: flex-start;
     position: relative;
     height: 840px;
+    width: 100%;
     margin-left: 10px;
+    box-sizing: border-box;
   }
 }
 
@@ -1487,7 +1495,7 @@ body {
   .benefit-list {
     display: flex;
     flex-direction: column;
-    width: 40%;
+    width: 50%;
     padding-bottom: 140px;
   }
 }
@@ -1599,8 +1607,8 @@ body {
     height: 100%;
     position: absolute;
     top: 0;
-    left: 38.6%;
-    transform: translateX(-38.6%);
+    left: 33%;
+    transform: translateX(-33%);
     z-index: 2;
   }
 }
@@ -1621,13 +1629,6 @@ body {
     padding: 40px 20px 20px 40px;
   }
 } */
-
-@media (min-width: 1200px) {
-  .benefit-descriptions-list {
-    width: 60%;
-    /* padding: 40px 20px 20px 40px; */
-  }
-}
 
 @media (max-width: 1200px) {
   .benefit-icon {
