@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
         window.scrollY || document.documentElement.scrollTop;
 
       entries.forEach((entry) => {
-        const dataId = entry.target.getAttribute("data-id"); // Get the data-id attribute
+        const dataId = entry.target.getAttribute("data-id");
 
         if (currentScrollTop > lastScrollTop) {
           // Scrolling down
@@ -37,7 +37,6 @@ document.addEventListener("DOMContentLoaded", function () {
             }
           }
         } else {
-          // Scrolling up
         }
       });
 
@@ -208,52 +207,12 @@ document.addEventListener("DOMContentLoaded", function () {
   // Initial observation for features
   observeFeatures();
 
-  // FAQ
-
-  const accordion = document.getElementById("accordion");
-  const items = accordion.querySelectorAll(".accordion-item");
-
-  items.forEach((item) => {
-    const link = item.querySelector(".link");
-    const arrowIcon = link.querySelector(".arrow-icon");
-    const submenu = item.querySelector(".submenu");
-
-    // Function to toggle the accordion item
-    const toggleAccordion = () => {
-      const isOpen = item.classList.contains("open");
-
-      // Toggle the visibility and rotation
-      submenu.style.maxHeight = isOpen ? "0px" : submenu.scrollHeight + "px";
-      submenu.style.opacity = isOpen ? "0" : "1";
-      link.parentElement.classList.toggle("open", !isOpen);
-
-      // Close other items if not allowing multiple open
-      if (!accordion.dataset.multiple) {
-        items.forEach((otherItem) => {
-          if (otherItem !== item) {
-            const otherSubmenu = otherItem.querySelector(".submenu");
-            otherSubmenu.style.maxHeight = "0px";
-            otherSubmenu.style.opacity = "0";
-            otherItem.classList.remove("open");
-          }
-        });
-      }
-    };
-
-    // Add click event to the link and arrow icon
-    link.addEventListener("click", toggleAccordion);
-    arrowIcon.addEventListener("click", (e) => {
-      e.stopPropagation(); // Prevent click event from bubbling up
-      toggleAccordion();
-    });
-  });
-
-  // Slider functionality
+  // --------------- FEATURES ITEMS SLIDER --------------
   function isDesktop() {
     return window.matchMedia("(min-width: 1200px)").matches;
   }
 
-  console.log("is desktop", isDesktop());
+  // console.log("is desktop", isDesktop());
 
   if (isDesktop()) {
     const scrollOffset = 500; // Offset to scroll a little beyond the current view
@@ -418,6 +377,46 @@ document.addEventListener("DOMContentLoaded", function () {
   titleItems.forEach((titleItem, index) => {
     titleItem.addEventListener("click", () => {
       activateBenefitItem(index);
+    });
+  });
+
+  // FAQ
+
+  const accordion = document.getElementById("accordion");
+  const items = accordion.querySelectorAll(".accordion-item");
+
+  items.forEach((item) => {
+    const link = item.querySelector(".link");
+    const arrowIcon = link.querySelector(".arrow-icon");
+    const submenu = item.querySelector(".submenu");
+
+    // Function to toggle the accordion item
+    const toggleAccordion = () => {
+      const isOpen = item.classList.contains("open");
+
+      // Toggle the visibility and rotation
+      submenu.style.maxHeight = isOpen ? "0px" : submenu.scrollHeight + "px";
+      submenu.style.opacity = isOpen ? "0" : "1";
+      link.parentElement.classList.toggle("open", !isOpen);
+
+      // Close other items if not allowing multiple open
+      if (!accordion.dataset.multiple) {
+        items.forEach((otherItem) => {
+          if (otherItem !== item) {
+            const otherSubmenu = otherItem.querySelector(".submenu");
+            otherSubmenu.style.maxHeight = "0px";
+            otherSubmenu.style.opacity = "0";
+            otherItem.classList.remove("open");
+          }
+        });
+      }
+    };
+
+    // Add click event to the link and arrow icon
+    link.addEventListener("click", toggleAccordion);
+    arrowIcon.addEventListener("click", (e) => {
+      e.stopPropagation(); // Prevent click event from bubbling up
+      toggleAccordion();
     });
   });
 
