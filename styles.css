@@ -762,13 +762,24 @@ body {
   }
 }
 /* CAROUSEL */
+@media (max-width: 1200px) {
+  .hero-carousel {
+    padding-top: 100px;
+    background-color: var(--accent-color);
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+}
 
-.hero-carousel {
-  padding-top: 100px;
-  background-color: var(--accent-color);
-  width: 100%;
-  overflow: hidden;
-  position: relative;
+@media (min-width: 1200px) {
+  .hero-carousel {
+    margin-top: 100px;
+    background-color: var(--accent-color);
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+  }
 }
 .hero-carousel-right {
   background-color: var(--accent-color);
